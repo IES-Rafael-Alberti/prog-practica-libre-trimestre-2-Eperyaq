@@ -9,5 +9,7 @@ interface  Persona{
 
     abstract fun info():String
 
+    abstract  fun acortarDistancia(pelea: Pelea):String
+
 
 }

@@ -1,6 +1,7 @@
 package org.practicatrim2
 
-class Escopeta(arma: TipoArma, tipomunicion:String, cantidadMunicion:Int, val municionTope: Int = 2 ):Armas(arma, tipomunicion, cantidadMunicion) {
+class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion:Int, private val municionTope: Int = 6):Atacable {
+    override val danio = 2
     /**
      * Disparas a tu contrincante y le bajas vida
      *
@@ -8,39 +9,37 @@ class Escopeta(arma: TipoArma, tipomunicion:String, cantidadMunicion:Int, val mu
      *
      *@return Informacion acerca de los datos del jugador
      */
-    override fun disparar(jugador:Jugador,daño:Int):String{
-        println("Disparas tu $arma e inflinges $daño")
+    override fun disparar(jugador:Jugador,danio:Int):String{
+        if (cantidadMunicion >0)
+            println("Disparas tu $arma e inflinges $danio")
         cantidadMunicion--
-        jugador.vidas - danioArmas()
+        jugador.vidas -= danio
 
 
         return jugador.info()
     }
 
-
     /**
-     * Indica el daño que realiza el arma
+     * Recargas tu arma al tope permitido por el cargador siempre
      *
-     * @return daño el daño que realiza tu arma
-     *
+     * @return String indicando cuantas balas has recargado
      */
-    override fun danioArmas(): Int{
-        var danio = 0
-        danio = when (arma){
-            TipoArma.EscopetaLargaDistancia -> 4
-            TipoArma.Escopeta -> 2
-            TipoArma.Revolver -> 2
-            TipoArma.Cuchillo -> 1
-            TipoArma.palo_GomaEspuma -> 0
-        }
-        return danio
+    override fun recargar(): String {
+        cantidadMunicion = municionTope
+        return "Recargas tu $arma con $municionTope balas"
     }
 
-
-    override fun recargar():String { //estaria bien preguntar cuantos quiere recargar pero en esta clase no vale para nada porque no creo que quieras recargar 1 solo
-        cantidadMunicion = municionTope
-
-
-        return "Recargas tu $arma con $municionTope balas"
+    /**
+     * Pegas un golpe a una distancia corta, si estas desde lejos no puedes pegar
+     *
+     */
+    override fun pegarMelee(pelea:Pelea, jugador: Jugador): String {
+        return if (pelea.distancia <=1){
+            println("Le pegas a melee al enemigo y le quitas 1 de vida")
+            jugador.vidas--
+            jugador.info()
+        }else{
+            "No llegas y por tanto no haces daño"
+        }
     }
 }

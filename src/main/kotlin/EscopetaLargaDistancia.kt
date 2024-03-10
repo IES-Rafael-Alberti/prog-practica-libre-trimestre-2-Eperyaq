@@ -1,20 +1,22 @@
 package org.practicatrim2
 
-class Revolver(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion:Int, private val municionTope: Int = 6):Atacable {
-    override val danio = 2
+class EscopetaLargaDistancia(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion:Int, private val municionTope: Int = 5):Atacable {
+    override var danio = 4
+
     /**
      * Disparas a tu contrincante y le bajas vida
      *
-     * @param jugador Jugador al que bajarle la vida
+     *@param jugador Jugador al que bajarle la vida
      *
-     *@return Informacion acerca de los datos del jugador
+     *@return Informacion acerca de los datos del [jugador]
      */
     override fun disparar(jugador:Jugador,danio:Int, pelea: Pelea):String{
-        if (cantidadMunicion >0)
-        println("Disparas tu $arma e inflinges $danio")
-        cantidadMunicion--
-        jugador.vidas -= danio
 
+        if (cantidadMunicion >0) {
+            println("Disparas tu $arma e inflinges $danio")
+            cantidadMunicion--
+            jugador.vidas -= danio
+        }
 
         return jugador.info()
     }
@@ -25,12 +27,12 @@ class Revolver(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
      * @return String indicando cuantas balas has recargado
      */
     override fun recargar(): String {
-            cantidadMunicion = municionTope
-            return "Recargas tu $arma con $municionTope balas"
+        cantidadMunicion = municionTope
+        return "Recargas tu $arma con $municionTope balas"
     }
 
     /**
-     * Pegas un golpe a una distancia corta, si estas desde lejos, fallas
+     * Pegas un golpe a una distancia corta, si estas desde lejos no puedes pegar
      *
      */
     override fun pegarMelee(pelea:Pelea, jugador: Jugador): String {
@@ -43,7 +45,7 @@ class Revolver(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
         }
     }
 
-    override fun inspeccionar(): String {
-        return "Tu arma es un $arma, tus balas actuales son $cantidadMunicion y la máxima posible $municionTope"
+    override fun inspeccionar():String{
+        return "Tu arma actual es una $arma, actualmente tienes $cantidadMunicion"
     }
 }

@@ -6,7 +6,7 @@ interface Atacable {
         /**
          * Disparas a tu contrincante y le bajas vida
          */
-        abstract fun disparar(jugador:Jugador,danio:Int):String
+        abstract fun disparar(jugador:Jugador,danio:Int, pelea: Pelea):String // le paso la pelea para solo usarla en la escopeta
 
 
         /**
@@ -18,5 +18,10 @@ interface Atacable {
          * Pegas con tu arma a melee
          */
         abstract fun pegarMelee(pelea: Pelea, jugador: Jugador):String
+
+        /**
+         * Informacion sobre el arma que tienes en el momento
+         */
+        abstract fun inspeccionar():String
 
 }

@@ -1,7 +1,7 @@
 package org.practicatrim2
 
-class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion:Int, private val municionTope: Int = 6):Atacable {
-    override val danio = 2
+class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion:Int, private val municionTope: Int = 2):Atacable {
+    override var danio = 2
     /**
      * Disparas a tu contrincante y le bajas vida
      *
@@ -9,12 +9,22 @@ class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
      *
      *@return Informacion acerca de los datos del jugador
      */
-    override fun disparar(jugador:Jugador,danio:Int):String{
-        if (cantidadMunicion >0)
-            println("Disparas tu $arma e inflinges $danio")
-        cantidadMunicion--
-        jugador.vidas -= danio
+    override fun disparar(jugador:Jugador,danio:Int, pelea: Pelea):String{
 
+        if (pelea.distancia < 6){ //segun lo cerca que estén la escopeta hará mas o menos daño
+            this.danio = 3
+        }else if (pelea.distancia < 4){
+            this.danio = 4
+        }
+        else{
+            this.danio = 5
+        }
+
+        if (cantidadMunicion >0) {
+            println("Disparas tu $arma e inflinges $danio")
+            cantidadMunicion--
+            jugador.vidas -= danio
+        }
 
         return jugador.info()
     }
@@ -41,5 +51,9 @@ class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
         }else{
             "No llegas y por tanto no haces daño"
         }
+    }
+
+    override fun inspeccionar():String{
+        return "Tu arma actual es una $arma de doble barril, actualmente tienes $cantidadMunicion"
     }
 }

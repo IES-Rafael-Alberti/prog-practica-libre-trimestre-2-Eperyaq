@@ -1,5 +1,6 @@
 package org.practicatrim2
+import kotlin.random.Random
 
 fun main() {
-    println("Hello World!")
+    val dado = GestionConsola.dado()
 }

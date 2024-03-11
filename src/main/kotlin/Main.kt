@@ -25,4 +25,4 @@ fun main() {
     fun obtenerArmaRandom(escopeta:Escopeta):Atacable{
         val armas:List = (Escopeta(TipoArma.Escopeta,"12mm",5,2))
     }
-}
+} vacas volando

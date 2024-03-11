@@ -1,9 +1,9 @@
 package org.practicatrim2.Armas
 
-enum class TipoArma {
-    Escopeta,
-    Revolver,
-    Cuchillo,
-    EscopetaLargaDistancia,
-    palo_GomaEspuma
+enum class TipoArma(val desc: String) {
+    ESCOPETA("Escopeta"),
+    REVOLVER("Revolver"),
+    CUCHILLO("Cuchillo"),
+    ESCOPETALARGADISTANCIA("Escopeta de larga distancia"),
+    PALOGOMAESPUMA("Palo de goma espuma")
 }

@@ -36,7 +36,7 @@ object GestionConsola {
 
     }
 
-    fun opcionesPelea(jugador: Jugador, ) {
+    fun opcionesPelea(jugador: Jugador, atacable: Atacable, pelea: Pelea ) {
         println("1. Disparar")
         println("2. Curarse")
         println("3. Recargar")
@@ -44,16 +44,50 @@ object GestionConsola {
 
         val opcion = preguntarnum()
 
+
         when (opcion){
-            1->
+            1-> jugador.arma.disparar(jugador, atacable.danio, pelea) // danio esta bien?
+            2-> jugador.curarse()
+            3-> jugador.arma.recargar()
+            4->
+
         }
+
 
 
     }
 
+    /**
+     * Solicita al usuario introducir una opcion entre un rango especifico
+     *
+     * @param maxop Numero maximo de opciones que va a tener disponibles
+     * @throws IllegalArgumentException Si el numero introducido por consola es mayor que [maxop] o igual que 0
+     * @return opcion La opcion escogida
+     */
+    fun opciones(maxop:Int):Int{
+        print("Escoge tu opcion: ")
+        var opcion = GestionConsola.preguntarnum()
+        var pinguinito = true
+
+        while (pinguinito) {
+            try {
+
+                if (opcion > maxop || opcion ==0) {
+                    throw IllegalArgumentException("Escoge un valor correcto") // si indican un numero mayor al pasado por parametros da error
+                } else {
+                    pinguinito = false
+                }
 
 
-    fun dado(){
+            } catch (e: IllegalArgumentException) {
+                println("ERROR, escoge un valor correcto")
+                opcion = GestionConsola.preguntarnum()
+            }
+        }
+        return opcion
+    }
+
+    fun dado(){ //todo si meto una letra o un numero fuera del rango no lo controla
         println("Introduzca un numero entre 1-5")
 
         var numjugador = 0

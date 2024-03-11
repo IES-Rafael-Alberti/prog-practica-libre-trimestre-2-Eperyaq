@@ -1,9 +1,10 @@
 package org.practicatrim2.Armas
 
+import org.practicatrim2.GestionConsola
 import org.practicatrim2.Jugador
 import org.practicatrim2.Pelea
 
-class EscopetaLargaDistancia(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion:Int, private val municionTope: Int = 5):
+class EscopetaLargaDistancia(var cantidadMunicion:Int, private val municionTope: Int = 5):
     Atacable {
     override var danio = 4
 
@@ -17,9 +18,12 @@ class EscopetaLargaDistancia(val arma: TipoArma, val tipomunicion:String, var ca
     override fun disparar(jugador: Jugador, danio:Int, pelea: Pelea){
 
         if (cantidadMunicion >0) {
-            println("Disparas tu $arma e inflinges $danio")
+            println("Disparas tu ${TipoArma.ESCOPETALARGADISTANCIA.desc} e inflinges $danio")
             cantidadMunicion--
             jugador.vidas -= danio
+        }else{
+            println("No tienes suficiente municion")
+            GestionConsola.opcionesPelea(jugador)
         }
 
         println(jugador.info())
@@ -32,7 +36,7 @@ class EscopetaLargaDistancia(val arma: TipoArma, val tipomunicion:String, var ca
      */
     override fun recargar() {
         cantidadMunicion = municionTope
-        println("Recargas tu $arma con $municionTope balas")
+        println("Recargas tu ${TipoArma.ESCOPETALARGADISTANCIA.desc} con $municionTope balas")
     }
 
     /**
@@ -50,6 +54,6 @@ class EscopetaLargaDistancia(val arma: TipoArma, val tipomunicion:String, var ca
     }
 
     override fun inspeccionar(){
-        println("Tu arma actual es una $arma, actualmente tienes $cantidadMunicion")
+        println("Tu arma actual es una ${TipoArma.ESCOPETALARGADISTANCIA.desc}, actualmente tienes $cantidadMunicion")
     }
 }

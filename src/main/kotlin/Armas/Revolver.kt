@@ -1,9 +1,10 @@
 package org.practicatrim2.Armas
 
+import org.practicatrim2.GestionConsola
 import org.practicatrim2.Jugador
 import org.practicatrim2.Pelea
 
-class Revolver(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion:Int, private val municionTope: Int = 6):
+class Revolver(var cantidadMunicion:Int, private val municionTope: Int = 6):
     Atacable {
     override val danio = 2
     /**
@@ -15,9 +16,12 @@ class Revolver(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
      */
     override fun disparar(jugador: Jugador, danio:Int, pelea: Pelea){
         if (cantidadMunicion >0) {
-            println("Disparas tu $arma e inflinges $danio")
+            println("Disparas tu ${TipoArma.REVOLVER.desc} e inflinges $danio")
             cantidadMunicion--
             jugador.vidas -= danio
+        }else{
+            println("No tienes suficiente municion")
+            GestionConsola.opcionesPelea(jugador)
         }
          println(jugador.info())
     }
@@ -29,7 +33,7 @@ class Revolver(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
      */
     override fun recargar(){
             cantidadMunicion = municionTope
-             println("Recargas tu $arma con $municionTope balas")
+             println("Recargas tu ${TipoArma.REVOLVER.desc} con $municionTope balas")
     }
 
     /**
@@ -47,6 +51,6 @@ class Revolver(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
     }
 
     override fun inspeccionar(){
-        println("Tu arma es un $arma, tus balas actuales son $cantidadMunicion y la máxima posible $municionTope")
+        println("Tu arma es un ${TipoArma.REVOLVER.desc}, tus balas actuales son $cantidadMunicion y la máxima posible $municionTope")
     }
 }

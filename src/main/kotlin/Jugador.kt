@@ -1,8 +1,9 @@
 package org.practicatrim2
 
-import org.practicatrim2.Armas.TipoArma
+import org.practicatrim2.Armas.Atacable
 
-class Jugador(val nombre:String, val arma: TipoArma, var vidas:Int):Persona {
+
+class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
 
 
     override fun seguir_camino() = println("Sigues tu camino...")
@@ -21,5 +22,17 @@ class Jugador(val nombre:String, val arma: TipoArma, var vidas:Int):Persona {
             pelea.distancia -= 1
             println("Acortas un metro de distancia")
         }
+    }
+
+    override fun curarse() {
+        println("Te curas 1 de vida")
+        vidas++
+        println(info())
+    }
+
+    override fun huir() { // esto va aqui??
+        println("Intentas huir...")
+        GestionConsola.dado()
+
     }
 }

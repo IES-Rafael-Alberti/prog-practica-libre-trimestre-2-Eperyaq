@@ -4,25 +4,25 @@ import org.practicatrim2.GestionConsola
 import org.practicatrim2.Jugador
 import org.practicatrim2.Pelea
 
-class Cuchillo(val arma: TipoArma, var cantidadCuchillos:Int, private val cuchillosRespuesto: Int = 5): Atacable {
+class Cuchillo(var cantidadCuchillos:Int, private val cuchillosRespuesto: Int = 5): Atacable {
     override val danio = 2
     /**
      * Lanzas un cuchillo contra tu oponente y le bajas la vida
      *
      * @param jugador Jugador al que bajarle la vida
      *
-     *@return Informacion acerca de los datos del jugador
+     *@return Informacion acerca de los datos del [jugador]
      */
     override fun disparar(jugador: Jugador, danio:Int, pelea: Pelea){
         if (cantidadCuchillos >0) {
-            println("Disparas tu $arma e inflinges $danio")
+            println("Lanzas tu ${TipoArma.CUCHILLO.desc} e inflinges $danio")
             cantidadCuchillos--
             jugador.vidas -= danio
         }else{
             println("No tienes suficientes cuchillos")
             GestionConsola.opcionesPelea(jugador)
         }
-        println(jugador.info())    }
+        println(jugador.info())}
 
     /**
      * Recargas tus cuchillos
@@ -31,7 +31,7 @@ class Cuchillo(val arma: TipoArma, var cantidadCuchillos:Int, private val cuchil
      */
     override fun recargar() {
         cantidadCuchillos = cuchillosRespuesto
-        println("Recargas tu $arma y ahora tienes $cantidadCuchillos Cuchillos más")
+        println("Recargas tu ${TipoArma.CUCHILLO.desc} y ahora tienes $cantidadCuchillos Cuchillos más")
     }
 
     /**
@@ -49,6 +49,6 @@ class Cuchillo(val arma: TipoArma, var cantidadCuchillos:Int, private val cuchil
     }
 
     override fun inspeccionar(){
-        println("Tienes un $arma, tus chuchillos actuales son $cantidadCuchillos y los de repuesto son $cuchillosRespuesto")
+        println("Tienes un ${TipoArma.CUCHILLO.desc}, tus chuchillos actuales son $cantidadCuchillos y los de repuesto son $cuchillosRespuesto")
     }
 }

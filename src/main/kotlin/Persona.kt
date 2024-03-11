@@ -11,5 +11,9 @@ interface  Persona{
 
     abstract  fun acortarDistancia(pelea: Pelea)
 
+    abstract fun curarse()
+
+    abstract fun huir()
+
 
 }

@@ -3,7 +3,7 @@ package org.practicatrim2.Armas
 import org.practicatrim2.Jugador
 import org.practicatrim2.Pelea
 
-class PalodeGomaEspuma(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion:Int, private val municionTope: Int = 5):
+class PalodeGomaEspuma():
     Atacable {
     override var danio = 4
 
@@ -11,8 +11,7 @@ class PalodeGomaEspuma(val arma: TipoArma, val tipomunicion:String, var cantidad
      * Disparas...
      *
      *@param jugador Jugador al que seguro que le haces gracia
-     *
-     *@return algo muy guapo
+     *@param pelea Pelea en la que participas
      */
     override fun disparar(jugador: Jugador, danio:Int, pelea: Pelea){
         println("Mmmm, que disparas? rayos laser?")
@@ -34,7 +33,7 @@ class PalodeGomaEspuma(val arma: TipoArma, val tipomunicion:String, var cantidad
     override fun pegarMelee(pelea: Pelea, jugador: Jugador){
         if (pelea.distancia <=1){
             println("Le pegas a melee al enemigo y le quitas 1 de vida")
-            jugador.vidas--
+            jugador.vidas --
             println(jugador.info())
         }else{
             println("No llegas y por tanto no haces daño")
@@ -42,6 +41,6 @@ class PalodeGomaEspuma(val arma: TipoArma, val tipomunicion:String, var cantidad
     }
 
     override fun inspeccionar(){
-        println("Tu arma actual es un $arma, y... no se que mas quieres saber la verdad")
+        println("Tu arma actual es un ${TipoArma.PALOGOMAESPUMA.desc}, y... no se que mas quieres saber la verdad")
     }
 }

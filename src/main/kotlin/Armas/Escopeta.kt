@@ -1,9 +1,10 @@
 package org.practicatrim2.Armas
 
+import org.practicatrim2.GestionConsola
 import org.practicatrim2.Jugador
 import org.practicatrim2.Pelea
 
-class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion:Int, private val municionTope: Int = 2):
+class Escopeta(var cantidadMunicion:Int, private val municionTope: Int = 2):
     Atacable {
     override var danio = 2
     /**
@@ -25,9 +26,12 @@ class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
         }
 
         if (cantidadMunicion >0) {
-            println("Disparas tu $arma e inflinges $danio")
+            println("Disparas tu ${TipoArma.ESCOPETA.desc}  e inflinges $danio")
             cantidadMunicion--
             jugador.vidas -= danio
+        }else{
+            println("No tienes suficiente municion")
+            GestionConsola.opcionesPelea(jugador)
         }
 
          println(jugador.info())
@@ -40,7 +44,7 @@ class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
      */
     override fun recargar(){
         cantidadMunicion = municionTope
-         println("Recargas tu $arma con $municionTope balas")
+         println("Recargas tu ${TipoArma.ESCOPETA.desc} con $municionTope balas")
     }
 
     /**
@@ -58,6 +62,6 @@ class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
     }
 
     override fun inspeccionar(){
-         println("Tu arma actual es una $arma de doble barril, actualmente tienes $cantidadMunicion")
+         println("Tu arma actual es una ${TipoArma.ESCOPETA.desc} de doble barril, actualmente tienes $cantidadMunicion")
     }
 }

@@ -2,14 +2,6 @@ package org.practicatrim2
 
 class Pelea(val jugador:Jugador, var distancia:Int) {
 
-    fun opcionesPelea() {
-        println("1. Disparar")
-        println("2. Curarse")
-        println("3. Huir")
-
-
-    }
-
 
     /**
      * Solicita al usuario introducir una opcion entre un rango especifico

@@ -2,14 +2,14 @@ package org.practicatrim2
 
 interface  Persona{
 
-    abstract fun insultar():String
+    abstract fun insultar()
 
-    abstract fun seguir_camino():String
+    abstract fun seguir_camino()
 
 
-    abstract fun info():String
+    abstract fun info()
 
-    abstract  fun acortarDistancia(pelea: Pelea):String
+    abstract  fun acortarDistancia(pelea: Pelea)
 
 
 }

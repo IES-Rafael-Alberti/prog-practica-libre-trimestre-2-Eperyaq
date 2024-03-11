@@ -1,4 +1,4 @@
-package org.practicatrim2
+package org.practicatrim2.Armas
 
 enum class TipoArma {
     Escopeta,

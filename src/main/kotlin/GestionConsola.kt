@@ -1,4 +1,5 @@
 package org.practicatrim2
+import org.practicatrim2.Armas.Atacable
 import kotlin.random.Random
 
 object GestionConsola {
@@ -17,23 +18,36 @@ object GestionConsola {
         return numero
     }
 
-    fun mostrarAtacarHuir(opcionARealizar:Int, jugador: Jugador){
+    fun mostrarAtacarHuir(jugador: Jugador){
         var num = 0
 
         println("1. Pelear")
         println("2.Lo insultas y pasas de el")
         println("3. Coges por otra calle")
 
-        num = GestionConsola.preguntarnum()
+        num =preguntarnum()
 
-/*
-        when (opcionARealizar){
-            1 -> jugador.pelear()
+
+        when (num) {
+           // 1 -> jugador.pelear()
             2 -> jugador.insultar()
-            3 -> jugador.cogerOtraCalle()
+           // 3 -> jugador.cogerOtraCalle()
         }
 
- */
+    }
+
+    fun opcionesPelea(jugador: Jugador, ) {
+        println("1. Disparar")
+        println("2. Curarse")
+        println("3. Recargar")
+        println("4. Huir")
+
+        val opcion = preguntarnum()
+
+        when (opcion){
+            1->
+        }
+
 
     }
 

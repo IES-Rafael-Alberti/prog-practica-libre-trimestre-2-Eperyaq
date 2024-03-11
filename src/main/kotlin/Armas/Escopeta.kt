@@ -1,6 +1,10 @@
-package org.practicatrim2
+package org.practicatrim2.Armas
 
-class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion:Int, private val municionTope: Int = 2):Atacable {
+import org.practicatrim2.Jugador
+import org.practicatrim2.Pelea
+
+class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion:Int, private val municionTope: Int = 2):
+    Atacable {
     override var danio = 2
     /**
      * Disparas a tu contrincante y le bajas vida
@@ -9,7 +13,7 @@ class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
      *
      *@return Informacion acerca de los datos del jugador
      */
-    override fun disparar(jugador:Jugador,danio:Int, pelea: Pelea):String{
+    override fun disparar(jugador: Jugador, danio:Int, pelea: Pelea){
 
         if (pelea.distancia < 6){ //segun lo cerca que estén la escopeta hará mas o menos daño
             this.danio = 3
@@ -26,7 +30,7 @@ class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
             jugador.vidas -= danio
         }
 
-        return jugador.info()
+         println(jugador.info())
     }
 
     /**
@@ -34,26 +38,26 @@ class Escopeta(val arma: TipoArma, val tipomunicion:String, var cantidadMunicion
      *
      * @return String indicando cuantas balas has recargado
      */
-    override fun recargar(): String {
+    override fun recargar(){
         cantidadMunicion = municionTope
-        return "Recargas tu $arma con $municionTope balas"
+         println("Recargas tu $arma con $municionTope balas")
     }
 
     /**
      * Pegas un golpe a una distancia corta, si estas desde lejos no puedes pegar
      *
      */
-    override fun pegarMelee(pelea:Pelea, jugador: Jugador): String {
-        return if (pelea.distancia <=1){
+    override fun pegarMelee(pelea: Pelea, jugador: Jugador){
+         if (pelea.distancia <=1){
             println("Le pegas a melee al enemigo y le quitas 1 de vida")
             jugador.vidas--
-            jugador.info()
+            println(jugador.info())
         }else{
-            "No llegas y por tanto no haces daño"
+            println("No llegas y por tanto no haces daño")
         }
     }
 
-    override fun inspeccionar():String{
-        return "Tu arma actual es una $arma de doble barril, actualmente tienes $cantidadMunicion"
+    override fun inspeccionar(){
+         println("Tu arma actual es una $arma de doble barril, actualmente tienes $cantidadMunicion")
     }
 }

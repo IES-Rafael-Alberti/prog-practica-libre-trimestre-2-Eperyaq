@@ -77,4 +77,6 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
             //cambiar el estado del bucle de la pelea
         }
     }
+
+    fun estavivo():Boolean = vidas>0
 }

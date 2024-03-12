@@ -8,6 +8,14 @@ class PalodeGomaEspuma():
     override var danio = 1
 
     /**
+     * Comprueba si el arma tiene municion suficiente como para disparar
+     */
+    override fun comprobarMuncion():Boolean{
+        println("Mmmm, que disparas? rayos laser?")
+        return false
+    }
+
+    /**
      * Disparas...
      *
      *@param jugador Jugador al que seguro que le haces gracia

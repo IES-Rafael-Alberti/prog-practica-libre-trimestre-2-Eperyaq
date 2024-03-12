@@ -7,6 +7,12 @@ import org.practicatrim2.Pelea
 class Escopeta(var cantidadMunicion:Int, private val municionTope: Int = 2):
     Atacable {
     override var danio = 2
+
+    /**
+     * Comprueba si el arma tiene municion suficiente como para disparar
+     */
+    override fun comprobarMuncion():Boolean =  cantidadMunicion >0
+
     /**
      * Disparas a tu contrincante y le bajas vida
      *

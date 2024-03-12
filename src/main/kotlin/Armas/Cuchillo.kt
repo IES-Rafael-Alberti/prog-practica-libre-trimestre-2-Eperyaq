@@ -7,6 +7,11 @@ import org.practicatrim2.Pelea
 class Cuchillo(var cantidadCuchillos:Int): Atacable {
     override val danio = 2
 
+    /**
+     * Comprueba si el arma tiene municion suficiente como para disparar
+     */
+    override fun comprobarMuncion():Boolean =  cantidadCuchillos >0
+
     companion object{
         private val cuchillosRespuesto: Int = 5 // la cantidad de cuchillos máxima que puede tener
     }

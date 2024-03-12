@@ -1,4 +1,5 @@
 package org.practicatrim2
+import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.Armas.*
 
 fun main() {
@@ -11,19 +12,12 @@ fun main() {
     ).random()
 
     //val dado = GestionConsola.dado() // funciona guay
- /*
 
-    println("Vas andando por el antiguo oeste en busqueda de la ubicacion que te venia en la carta que recogiste")
-    println("Te encuentras con un borracho que te reta a un duelo")
-    GestionConsola.mostrarAtacarHuir(personajePrincipal)
-
-
-  */
     val personajePrincipal = Jugador("Khenji",listaArmasDCS,10)
     val j1 = Jugador("Elia",listaArmasDCS,5)
     val pelea = Pelea(personajePrincipal,j1)
 
     pelea.iniciarPelea(personajePrincipal,j1,pelea, listaArmasDCS)
-
+    val t = Terminal()
 
 }

@@ -9,22 +9,25 @@ interface Atacable {
         /**
          * Disparas a tu contrincante y le bajas vida
          */
-        abstract fun disparar(jugador: Jugador, pelea: Pelea, atacable: Atacable) // le paso la pelea para solo usarla en la escopeta
+        fun disparar(jugador: Jugador, pelea: Pelea, atacable: Atacable) // le paso la pelea para solo usarla en la escopeta
 
 
         /**
          * Recarga el arma
          */
-        abstract fun recargar()
+        fun recargar()
 
         /**
          * Pegas con tu arma a melee
          */
-        abstract fun pegarMelee(pelea: Pelea, jugador: Jugador)
+        fun pegarMelee(pelea: Pelea, jugador: Jugador)
 
         /**
          * Informacion sobre el arma que tienes en el momento
          */
-        abstract fun inspeccionar()
+        fun inspeccionar()
+
+
+        fun comprobarMuncion():Boolean
 
 }

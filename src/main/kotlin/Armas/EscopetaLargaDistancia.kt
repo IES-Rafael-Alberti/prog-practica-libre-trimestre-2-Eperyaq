@@ -9,6 +9,11 @@ class EscopetaLargaDistancia(var cantidadMunicion:Int, private val municionTope:
     override var danio = 4
 
     /**
+     * Comprueba si el arma tiene municion suficiente como para disparar
+     */
+    override fun comprobarMuncion():Boolean =  cantidadMunicion >0
+
+    /**
      * Disparas a tu contrincante y le bajas vida
      *
      *@param jugador Jugador al que bajarle la vida

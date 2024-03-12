@@ -37,9 +37,7 @@ object GestionConsola {
         when (num) {
             1 -> opcionesPelea(jugador, atacable,pelea)
             2 -> jugador.insultar()
-
         }
-
     }
 
     fun opcionesPelea(jugador: Jugador, atacable: Atacable, pelea: Pelea ) {
@@ -49,17 +47,16 @@ object GestionConsola {
         println("4. Huir")
 
         val opcion = opciones(4)
-
-
         when (opcion){
-            1-> jugador.arma.disparar(jugador, pelea,atacable) // danio esta bien?
+            1-> if (jugador.arma.comprobarMuncion()) {
+                    jugador.arma.disparar(jugador, pelea, atacable)
+                }else{
+                    opcionesPelea(jugador,atacable,pelea)
+                }
             2-> jugador.curarse()
             3-> jugador.arma.recargar()
             4-> jugador.huir()
         }
-
-
-
     }
 
     /**
@@ -82,8 +79,6 @@ object GestionConsola {
                 } else {
                     pinguinito = false
                 }
-
-
             } catch (e: IllegalArgumentException) {
                 println("ERROR, escoge un valor correcto")
                 opcion = preguntarnum()

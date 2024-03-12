@@ -14,15 +14,17 @@ class Escopeta(var cantidadMunicion:Int, private val municionTope: Int = 2):
      *
      *@return Informacion acerca de los datos del jugador
      */
-    override fun disparar(jugador: Jugador, danio:Int, pelea: Pelea){
+    override fun disparar(jugador: Jugador,pelea: Pelea,atacable: Atacable){
 
         if (pelea.distancia < 6){ //segun lo cerca que estén la escopeta hará mas o menos daño
             this.danio = 3
         }else if (pelea.distancia < 4){
             this.danio = 4
         }
-        else{
+        else if (pelea.distancia <2){
             this.danio = 5
+        }else{
+            this.danio = 2
         }
 
         if (cantidadMunicion >0) {
@@ -31,10 +33,10 @@ class Escopeta(var cantidadMunicion:Int, private val municionTope: Int = 2):
             jugador.vidas -= danio
         }else{
             println("No tienes suficiente municion")
-            GestionConsola.opcionesPelea(jugador)
+            GestionConsola.opcionesPelea(jugador,atacable,pelea)
         }
 
-         println(jugador.info())
+         jugador.info()
     }
 
     /**

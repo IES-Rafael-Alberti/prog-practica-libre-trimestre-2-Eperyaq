@@ -1,5 +1,7 @@
 package org.practicatrim2
 
+import org.practicatrim2.Armas.Atacable
+
 interface  Persona{
 
     abstract fun insultar()
@@ -14,6 +16,8 @@ interface  Persona{
     abstract fun curarse()
 
     abstract fun huir()
+
+    abstract fun morir()
 
 
 }

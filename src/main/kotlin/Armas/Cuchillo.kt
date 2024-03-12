@@ -4,8 +4,12 @@ import org.practicatrim2.GestionConsola
 import org.practicatrim2.Jugador
 import org.practicatrim2.Pelea
 
-class Cuchillo(var cantidadCuchillos:Int, private val cuchillosRespuesto: Int = 5): Atacable {
+class Cuchillo(var cantidadCuchillos:Int): Atacable {
     override val danio = 2
+
+    companion object{
+        private val cuchillosRespuesto: Int = 5 // la cantidad de cuchillos máxima que puede tener
+    }
     /**
      * Lanzas un cuchillo contra tu oponente y le bajas la vida
      *
@@ -13,16 +17,17 @@ class Cuchillo(var cantidadCuchillos:Int, private val cuchillosRespuesto: Int = 
      *
      *@return Informacion acerca de los datos del [jugador]
      */
-    override fun disparar(jugador: Jugador, danio:Int, pelea: Pelea){
-        if (cantidadCuchillos >0) {
+    override fun disparar(jugador: Jugador, pelea: Pelea, atacable: Atacable) {
+        if (cantidadCuchillos > 0) {
             println("Lanzas tu ${TipoArma.CUCHILLO.desc} e inflinges $danio")
             cantidadCuchillos--
             jugador.vidas -= danio
-        }else{
+        } else {
             println("No tienes suficientes cuchillos")
-            GestionConsola.opcionesPelea(jugador)
+            GestionConsola.opcionesPelea(jugador, atacable, pelea)
         }
-        println(jugador.info())}
+        jugador.info()
+    }
 
     /**
      * Recargas tus cuchillos

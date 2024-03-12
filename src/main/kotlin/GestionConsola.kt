@@ -3,6 +3,14 @@ import org.practicatrim2.Armas.Atacable
 import kotlin.random.Random
 
 object GestionConsola {
+
+    /**
+     * Solicita al usuario introducir un numero a traves de la consola
+     *
+     * Hasta que no introduce un numero correcto no va a parar de preguntar por ese numero
+     *
+     * @return El numero introducido por el usuario
+     */
     fun preguntarnum():Int{
         var penguin = true
         var numero= 0
@@ -18,20 +26,18 @@ object GestionConsola {
         return numero
     }
 
-    fun mostrarAtacarHuir(jugador: Jugador){
+    fun mostrarAtacarHuir(jugador: Jugador, npc:Jugador, pelea: Pelea, atacable: Atacable){
         var num = 0
 
         println("1. Pelear")
         println("2.Lo insultas y pasas de el")
-        println("3. Coges por otra calle")
 
-        num =preguntarnum()
-
+        num = opciones(2)
 
         when (num) {
-           // 1 -> jugador.pelear()
+            1 -> opcionesPelea(jugador, atacable,pelea)
             2 -> jugador.insultar()
-           // 3 -> jugador.cogerOtraCalle()
+
         }
 
     }
@@ -42,15 +48,14 @@ object GestionConsola {
         println("3. Recargar")
         println("4. Huir")
 
-        val opcion = preguntarnum()
+        val opcion = opciones(4)
 
 
         when (opcion){
-            1-> jugador.arma.disparar(jugador, atacable.danio, pelea) // danio esta bien?
+            1-> jugador.arma.disparar(jugador, pelea,atacable) // danio esta bien?
             2-> jugador.curarse()
             3-> jugador.arma.recargar()
-            4->
-
+            4-> jugador.huir()
         }
 
 
@@ -66,7 +71,7 @@ object GestionConsola {
      */
     fun opciones(maxop:Int):Int{
         print("Escoge tu opcion: ")
-        var opcion = GestionConsola.preguntarnum()
+        var opcion =preguntarnum()
         var pinguinito = true
 
         while (pinguinito) {
@@ -81,27 +86,32 @@ object GestionConsola {
 
             } catch (e: IllegalArgumentException) {
                 println("ERROR, escoge un valor correcto")
-                opcion = GestionConsola.preguntarnum()
+                opcion = preguntarnum()
             }
         }
         return opcion
     }
 
-    fun dado(){ //todo si meto una letra o un numero fuera del rango no lo controla
+    /**
+     * Tiras un dado
+     *
+     * @return true Si has tenido suerte y has acertado el numero del dado.
+     * false Si no has tenido suerte y no has acertado el numero del dado.
+     *
+     */
+    fun dado():Boolean{ //todo si meto una letra o un numero fuera del rango no lo controla
         println("Introduzca un numero entre 1-5")
 
         var numjugador = 0
-        numjugador = preguntarnum()
+        numjugador = opciones(5)
         var numerodado = Random.nextInt(1,6) //genera un numero aleatorio entre el 1 y el 5
-        try {
 
-            if (numjugador == numerodado){
-                println("Has tenido suerte")
-            }else{
-                println("No has acertado.")
-            }
-        }catch (e: NumberFormatException){
-            println("ERROR, Pierdes la oportunidad por gracioso")
+        if (numjugador == numerodado){
+            println("Has tenido suerte")
+            return true
+        }else{
+            println("No has acertado.")
+            return false
         }
     }
 

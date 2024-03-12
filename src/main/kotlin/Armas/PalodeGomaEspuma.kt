@@ -5,7 +5,7 @@ import org.practicatrim2.Pelea
 
 class PalodeGomaEspuma():
     Atacable {
-    override var danio = 4
+    override var danio = 1
 
     /**
      * Disparas...
@@ -13,7 +13,7 @@ class PalodeGomaEspuma():
      *@param jugador Jugador al que seguro que le haces gracia
      *@param pelea Pelea en la que participas
      */
-    override fun disparar(jugador: Jugador, danio:Int, pelea: Pelea){
+    override fun disparar(jugador: Jugador,pelea: Pelea,atacable: Atacable){
         println("Mmmm, que disparas? rayos laser?")
     }
 

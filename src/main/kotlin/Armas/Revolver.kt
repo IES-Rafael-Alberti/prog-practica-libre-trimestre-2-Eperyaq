@@ -14,16 +14,16 @@ class Revolver(var cantidadMunicion:Int, private val municionTope: Int = 6):
      *
      *@return Informacion acerca de los datos del jugador
      */
-    override fun disparar(jugador: Jugador, danio:Int, pelea: Pelea){
+    override fun disparar(jugador: Jugador,pelea: Pelea,atacable: Atacable){
         if (cantidadMunicion >0) {
             println("Disparas tu ${TipoArma.REVOLVER.desc} e inflinges $danio")
             cantidadMunicion--
-            jugador.vidas -= danio
+            jugador.vidas -= danio // cambiar aqui al npc que es al que le ha bajado la vida
         }else{
             println("No tienes suficiente municion")
-            GestionConsola.opcionesPelea(jugador)
+            GestionConsola.opcionesPelea(jugador,atacable,pelea)
         }
-         println(jugador.info())
+         jugador.info() //kotlin.unit aqui
     }
 
     /**

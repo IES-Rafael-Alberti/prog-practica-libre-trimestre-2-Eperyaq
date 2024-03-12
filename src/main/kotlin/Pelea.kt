@@ -1,16 +1,27 @@
 package org.practicatrim2
 
-class Pelea(val jugador:Jugador, var distancia:Int) {
+
+import org.practicatrim2.Armas.Atacable
+import kotlin.random.Random
+
+class Pelea(val jugador:Jugador, val npc: Jugador) {
+    var distancia = Random.nextInt(1,10)
 
 
-
-
-
-
-    fun controlPelea(jugador1: Jugador, npc: Jugador){
+    fun iniciarPelea(jugador: Jugador, npc: Jugador, pelea: Pelea, atacable: Atacable){
         val pinguino = true
+        println("Que comience el duelo!")
         while (pinguino){
-            println("${jugador1.nombre} Que quieres hacer?")
+
+            println("trozo historia inicial... te encuentras con un borracho bla bla bla...")
+
+            println("${jugador.nombre} Que quieres hacer?")
+            GestionConsola.mostrarAtacarHuir(jugador, npc,pelea, atacable)
+            npc.morir()
+
+            println("${npc.nombre} Que quieres hacer?")
+            GestionConsola.mostrarAtacarHuir(jugador, npc, pelea, atacable)
+            jugador.morir()
 
 
         }

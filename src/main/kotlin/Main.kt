@@ -14,7 +14,7 @@ fun main() {
     //val dado = GestionConsola.dado() // funciona guay
 
     val personajePrincipal = Jugador("Khenji",listaArmasDCS,10)
-    val j1 = Jugador("Elia",listaArmasDCS,5)
+    val j1 = Jugador("Elia",listaArmasDCS,1)
     val pelea = Pelea(personajePrincipal,j1)
 
     pelea.iniciarPelea(personajePrincipal,j1,pelea, listaArmasDCS)

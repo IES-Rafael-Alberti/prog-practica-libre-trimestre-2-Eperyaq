@@ -10,8 +10,11 @@ class Pelea(val jugador:Jugador, val npc: Jugador) {
 
     fun iniciarPelea(jugador: Jugador, npc: Jugador, pelea: Pelea, atacable: Atacable){
 
-        var dañoRecibido = jugador.arma.danio
-        println("Que comience el duelo!")
+
+
+        var dañoRecibido = jugador.arma.danio // siempre recibe daño aunque no ataquen
+
+        GestionConsola.mostrarinfo("Que comience el duelo!")
         println("trozo historia inicial... te encuentras con un borracho bla bla bla...")
 
         while (jugador.estavivo() && npc.estavivo()){
@@ -21,19 +24,24 @@ class Pelea(val jugador:Jugador, val npc: Jugador) {
             println("Tu arma es😈 ${pelea.jugador.arma.javaClass.simpleName}")
             println("${jugador.nombre} Que quieres hacer?")
             GestionConsola.mostrarAtacarHuir(jugador, npc,pelea, atacable)
-
             npc.recibirDaño(dañoRecibido)
+            if (!npc.estavivo())
+
+
 
             clearConsole()
 
+            println("Tu arma es😎 ${pelea.npc.arma.javaClass.simpleName}")
             println("${npc.nombre} Que quieres hacer?")
             GestionConsola.mostrarAtacarHuir(jugador, npc, pelea, atacable)
             jugador.recibirDaño(dañoRecibido)
+            if (!jugador.estavivo())
 
-
+            clearConsole()
+            //Para el bucle pero cuando acaba todoo y comprueba de nuevo si estan vivos
         }
     }
     fun clearConsole() {
-        println("---------------------------------------------------------------------------------------------------------------------")
+        println("\n---------------------------------------------------------------------------------------------------------------------\n")
     }
 }

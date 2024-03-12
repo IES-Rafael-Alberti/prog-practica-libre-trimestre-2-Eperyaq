@@ -110,4 +110,7 @@ object GestionConsola {
         }
     }
 
+    fun mostrarinfo(mensaje:String){// pasar por parametro el mensaje y listo
+        println(mensaje)
+    }
 }

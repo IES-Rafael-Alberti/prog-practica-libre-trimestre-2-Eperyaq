@@ -20,4 +20,4 @@ fun main() {
     pelea.iniciarPelea(personajePrincipal,j1,pelea, listaArmasDCS)
     val t = Terminal()
 
-}
+}//Hola

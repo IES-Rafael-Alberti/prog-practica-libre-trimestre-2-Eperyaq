@@ -94,7 +94,7 @@ object GestionConsola {
      * false Si no has tenido suerte y no has acertado el numero del dado.
      *
      */
-    fun dado():Boolean{ //todo si meto una letra o un numero fuera del rango no lo controla
+    fun dado():Boolean{
         println("Introduzca un numero entre 1-5")
 
         var numjugador = 0

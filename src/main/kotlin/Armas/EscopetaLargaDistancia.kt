@@ -20,18 +20,11 @@ class EscopetaLargaDistancia(var cantidadMunicion:Int, private val municionTope:
      *
      *@return Informacion acerca de los datos del [jugador]
      */
-    override fun disparar(jugador: Jugador,pelea: Pelea,atacable: Atacable){
+    override fun disparar(jugador: Jugador,pelea: Pelea,atacable: Atacable):Int{
 
-        if (cantidadMunicion >0) {
-            println("Disparas tu ${TipoArma.ESCOPETALARGADISTANCIA.desc} e inflinges $danio")
-            cantidadMunicion--
-            jugador.vidas -= danio
-        }else{
-            println("No tienes suficiente municion")
-            GestionConsola.opcionesPelea(jugador, atacable,pelea)
-        }
-
-        jugador.info()
+        println("Disparas tu ${TipoArma.ESCOPETALARGADISTANCIA.desc} e inflinges $danio")
+        cantidadMunicion--
+        return danio
     }
 
     /**

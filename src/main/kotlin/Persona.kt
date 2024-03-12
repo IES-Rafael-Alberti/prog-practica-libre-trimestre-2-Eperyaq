@@ -4,20 +4,20 @@ import org.practicatrim2.Armas.Atacable
 
 interface  Persona{
 
-    abstract fun insultar()
+     fun insultar()
 
-    abstract fun seguir_camino()
+     fun seguir_camino()
 
 
-    abstract fun info()
+     fun info()
 
-    abstract  fun acortarDistancia(pelea: Pelea)
+      fun acortarDistancia(pelea: Pelea)
 
-    abstract fun curarse()
+     fun curarse()
 
-    abstract fun huir()
+     fun huir()
 
-    abstract fun morir()
+
 
 
 }

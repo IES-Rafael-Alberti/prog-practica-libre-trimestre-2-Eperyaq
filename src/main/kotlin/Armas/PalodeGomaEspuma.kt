@@ -11,7 +11,7 @@ class PalodeGomaEspuma():
      * Comprueba si el arma tiene municion suficiente como para disparar
      */
     override fun comprobarMuncion():Boolean{
-        println("Mmmm, que disparas? rayos laser?")
+        println("Mmmm, que intentas comprobar?")
         return false
     }
 
@@ -21,8 +21,9 @@ class PalodeGomaEspuma():
      *@param jugador Jugador al que seguro que le haces gracia
      *@param pelea Pelea en la que participas
      */
-    override fun disparar(jugador: Jugador,pelea: Pelea,atacable: Atacable){
+    override fun disparar(jugador: Jugador,pelea: Pelea,atacable: Atacable):Int{
         println("Mmmm, que disparas? rayos laser?")
+        return 0
     }
 
     /**

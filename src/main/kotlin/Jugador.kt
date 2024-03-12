@@ -71,12 +71,19 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
 
     }
 
-    override fun morir() {
-        if (vidas == vidaMinima){
-            println("No resistes más y mueres...")
-            //cambiar el estado del bucle de la pelea
-        }
-    }
 
-    fun estavivo():Boolean = vidas>0
+    /**
+     * Comprueba si esta vivo
+     */
+    fun estavivo():Boolean = vidas>0 //si tiene vida esta vivo :D
+
+    /**
+     * Recibes el daño del ataque
+     * @param [dañoRecibido], la vida que le baja al personaje
+     *
+     */
+    fun recibirDaño(dañoRecibido:Int){
+        vidas -= dañoRecibido
+        println("La vida de $nombre es $vidas")
+    }
 }

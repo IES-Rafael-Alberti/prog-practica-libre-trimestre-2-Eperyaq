@@ -7,10 +7,6 @@ import org.practicatrim2.Pelea
 class Cuchillo(var cantidadCuchillos:Int): Atacable {
     override val danio = 2
 
-    /**
-     * Comprueba si el arma tiene municion suficiente como para disparar
-     */
-    override fun comprobarMuncion():Boolean =  cantidadCuchillos >0
 
     companion object{
         private val cuchillosRespuesto: Int = 5 // la cantidad de cuchillos máxima que puede tener
@@ -22,16 +18,23 @@ class Cuchillo(var cantidadCuchillos:Int): Atacable {
      *
      *@return Informacion acerca de los datos del [jugador]
      */
-    override fun disparar(jugador: Jugador, pelea: Pelea, atacable: Atacable) {
-        if (cantidadCuchillos > 0) {
-            println("Lanzas tu ${TipoArma.CUCHILLO.desc} e inflinges $danio")
-            cantidadCuchillos--
-            jugador.vidas -= danio
-        } else {
+    override fun disparar(jugador: Jugador, pelea: Pelea, atacable: Atacable):Int {
+        println("Lanzas tu ${TipoArma.CUCHILLO.desc} e inflinges $danio")
+        cantidadCuchillos--
+        return danio
+    }
+
+    /**
+     * PRINCIPIO TREMENDAMENTE SOLIDO
+     * Comprueba si el arma tiene municion suficiente como para disparar
+     */
+    override fun comprobarMuncion():Boolean{
+        if (cantidadCuchillos >0)
+            return true
+        else {
             println("No tienes suficientes cuchillos")
-            GestionConsola.opcionesPelea(jugador, atacable, pelea)
+            return false
         }
-        jugador.info()
     }
 
     /**

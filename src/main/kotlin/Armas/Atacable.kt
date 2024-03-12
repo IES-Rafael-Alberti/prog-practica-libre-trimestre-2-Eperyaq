@@ -9,7 +9,7 @@ interface Atacable {
         /**
          * Disparas a tu contrincante y le bajas vida
          */
-        fun disparar(jugador: Jugador, pelea: Pelea, atacable: Atacable) // le paso la pelea para solo usarla en la escopeta
+        fun disparar(jugador: Jugador, pelea: Pelea, atacable: Atacable):Int  // le paso la pelea para solo usarla en la escopeta, retorna un entero que es el daño que hace
 
 
         /**

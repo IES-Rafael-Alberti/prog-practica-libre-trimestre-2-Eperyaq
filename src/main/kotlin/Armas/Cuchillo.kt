@@ -1,5 +1,6 @@
 package org.practicatrim2.Armas
 
+import org.practicatrim2.Enemigo
 import org.practicatrim2.GestionConsola
 import org.practicatrim2.Jugador
 import org.practicatrim2.Pelea
@@ -51,7 +52,7 @@ class Cuchillo(var cantidadCuchillos:Int): Atacable {
      * Pegas navajazo a corta distancia que hace bastante daño, si no estas dentro del rango, fallas
      *
      */
-    override fun pegarMelee(pelea: Pelea, jugador: Jugador){
+    override fun pegarMelee(pelea: Pelea, jugador: Jugador, npc:Enemigo){
         if (pelea.distancia <=1){
             println("Le pegas a melee al enemigo y le quitas 5 de vida")
             jugador.vidas -= 5

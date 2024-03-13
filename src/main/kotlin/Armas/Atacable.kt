@@ -1,5 +1,6 @@
 package org.practicatrim2.Armas
 
+import org.practicatrim2.Enemigo
 import org.practicatrim2.Jugador
 import org.practicatrim2.Pelea
 
@@ -20,7 +21,7 @@ interface Atacable {
         /**
          * Pegas con tu arma a melee
          */
-        fun pegarMelee(pelea: Pelea, jugador: Jugador)
+        fun pegarMelee(pelea: Pelea, jugador: Jugador, npc:Enemigo)
 
         /**
          * Informacion sobre el arma que tienes en el momento

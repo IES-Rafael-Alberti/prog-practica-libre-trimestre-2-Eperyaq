@@ -15,7 +15,7 @@ interface  Persona{
 
      fun curarse()
 
-     fun huir()
+     fun huir(enemigo: Enemigo)
 
 
 

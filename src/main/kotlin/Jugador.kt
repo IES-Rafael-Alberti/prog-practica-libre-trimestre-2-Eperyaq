@@ -1,5 +1,6 @@
 package org.practicatrim2
 
+import com.github.ajalt.mordant.rendering.TextColors
 import org.practicatrim2.Armas.Atacable
 import org.practicatrim2.Armas.TipoArma
 import kotlin.random.Random
@@ -7,7 +8,6 @@ import kotlin.random.Random
 
 class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
     private val vidaMaxima = 10
-    private val vidaMinima = 0
 
     override fun seguir_camino() = println("Sigues tu camino...")
 
@@ -19,7 +19,7 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
     override fun insultar(){
         println("$!#*€")
 
-        val numerofijado = 2
+        val numerofijado = 2 //numero aleatorio, si sale el mismo en el random estas muerto
         val numerorandom = Random.nextInt(1,11)
         if (numerorandom == numerofijado){
             vidas-= 10
@@ -29,7 +29,7 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
     /**
      * Informacion sobre tu personaje
      */
-    override fun info() = println("A $nombre le quedan $vidas vidas.")
+    override fun info() = GestionConsola.mostrarinfo("A $nombre le quedan $vidas vidas.")
 
     /**
      * Avanzas un metro para acercarte mas al rival
@@ -37,10 +37,10 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
      */
     override fun acortarDistancia(pelea: Pelea){
         if (pelea.distancia <= 1){
-            println("No puedes acercarte más")
+            GestionConsola.mostrarinfo("No puedes acercarte más")
         }else {
             pelea.distancia -= 1
-            println("Acortas un metro de distancia")
+            GestionConsola.mostrarinfo("Acortas un metro, la distancia actual es: ${pelea.distancia} metros", TextColors.green)
         }
     }
 
@@ -49,23 +49,23 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
      */
     override fun curarse() {
         if (vidas == vidaMaxima){
-            println("No puedes curarte con la salud máxima")
+            GestionConsola.mostrarinfo("No puedes curarte con la salud máxima")
         }else {
-            println("Te curas 1 de vida")
+            GestionConsola.mostrarinfo("Te curas 1 de vida")
             vidas++
             println(info())
         }
     }
 
-    override fun huir() {
-        println("Intentas huir...")
+    override fun huir(enemigo: Enemigo) {
+        GestionConsola.mostrarinfo("Intentas huir...")
         GestionConsola.dado()
 
         if (GestionConsola.dado()){ //si es true
-
-            //salir de la pelea ya que has tenido suerte con el dado
+            GestionConsola.mostrarinfo("Has tenido suerte y has logrado huir matando instantaneamente al enemigo",TextColors.green)
+            enemigo.vidas-= 20 //lo siento pero es la unica manera que se me ocurre de cerrar el bucle sin un break
         }else{
-            println("No pudiste huir...")
+            GestionConsola.mostrarinfo("No pudiste huir...")
             //seguir con la pelea
         }
 

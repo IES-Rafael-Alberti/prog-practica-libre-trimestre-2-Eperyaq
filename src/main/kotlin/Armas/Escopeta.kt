@@ -1,5 +1,6 @@
 package org.practicatrim2.Armas
 
+import org.practicatrim2.Enemigo
 import org.practicatrim2.GestionConsola
 import org.practicatrim2.Jugador
 import org.practicatrim2.Pelea
@@ -52,7 +53,7 @@ class Escopeta(var cantidadMunicion:Int, private val municionTope: Int = 2):
      * Pegas un golpe a una distancia corta, si estas desde lejos no puedes pegar
      *
      */
-    override fun pegarMelee(pelea: Pelea, jugador: Jugador){
+    override fun pegarMelee(pelea: Pelea, jugador: Jugador,npc:Enemigo){
          if (pelea.distancia <=1){
             println("Le pegas a melee al enemigo y le quitas 1 de vida")
             jugador.vidas--

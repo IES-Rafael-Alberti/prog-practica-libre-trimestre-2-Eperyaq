@@ -8,10 +8,15 @@ interface Atacable {
 
         val danio:Int
         /**
-         * Disparas a tu contrincante y le bajas vida
+         * Disparas al npc  y le bajas vida RECIBE DAÑO EL NPC
          */
-        fun disparar(jugador: Jugador, pelea: Pelea, atacable: Atacable):Int  // le paso la pelea para solo usarla en la escopeta, retorna un entero que es el daño que hace
+        fun disparaJugador(npc: Enemigo, pelea: Pelea, atacable: Atacable)  // le paso la pelea para solo usarla en la escopeta, retorna un entero que es el daño que hace
 
+
+        /**
+         * Disparas al jugador y le bajas vida, RECIBE DAÑO EL JUGADOR
+         */
+        fun disparaNpc(jugador: Jugador, pelea: Pelea, atacable: Atacable)
 
         /**
          * Recarga el arma
@@ -21,7 +26,7 @@ interface Atacable {
         /**
          * Pegas con tu arma a melee
          */
-        fun pegarMelee(pelea: Pelea, jugador: Jugador, npc:Enemigo)
+        fun pegarMelee(pelea: Pelea, npc:Enemigo)
 
         /**
          * Informacion sobre el arma que tienes en el momento

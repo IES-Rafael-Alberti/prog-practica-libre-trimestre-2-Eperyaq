@@ -12,7 +12,7 @@ fun main() {
 
     val listaEnemigos = listOf(
         Enemigo("Jorge El Feo",listaArmasDCS,7),
-        Enemigo("Antonio El Mataescorias",listaArmasDCS,10),
+        Enemigo("David El Mataescorias",listaArmasDCS,10),
         Enemigo("Viti El Loco",listaArmasDCS,15)
     ).random()
 
@@ -21,8 +21,9 @@ fun main() {
     val pelea = Pelea(personajePrincipal,listaEnemigos)
 
 
-    GestionConsola.mostrarAtacarHuir(personajePrincipal, listaEnemigos, pelea, listaArmasDCS)
+    //GestionConsola.mostrarAtacarHuir(personajePrincipal, listaEnemigos, pelea, listaArmasDCS)
+    pelea.mostrarcositas(pelea,listaArmasDCS)
     //pelea.iniciarPelea(personajePrincipal,listaEnemigos,pelea, listaArmasDCS)
 
 
-}//Hola
+}

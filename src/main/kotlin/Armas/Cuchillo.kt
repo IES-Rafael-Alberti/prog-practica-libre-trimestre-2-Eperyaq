@@ -12,17 +12,32 @@ class Cuchillo(var cantidadCuchillos:Int): Atacable {
     companion object{
         private val cuchillosRespuesto: Int = 5 // la cantidad de cuchillos máxima que puede tener
     }
+
     /**
      * Lanzas un cuchillo contra tu oponente y le bajas la vida
      *
-     * @param jugador Jugador al que bajarle la vida
-     *
-     *@return Informacion acerca de los datos del [jugador]
+     * @param npc  al que bajarle la vida
+     * @param pelea en la que estas involucrado
+     * @param atacable arma que estas utilizando
      */
-    override fun disparar(jugador: Jugador, pelea: Pelea, atacable: Atacable):Int {
-        println("Lanzas tu ${TipoArma.CUCHILLO.desc} e inflinges $danio")
+    override fun disparaJugador(npc: Enemigo, pelea: Pelea, atacable: Atacable) {
+        GestionConsola.mostrarinfo("Lanzas tu ${TipoArma.CUCHILLO.desc} e inflinges $danio")
         cantidadCuchillos--
-        return danio
+        npc.recibirDaño(danio)
+    }
+
+    /**
+     * El NPC te Lanza un cuchillo contra te baja la vida
+     *
+     * @param jugador Jugador al que bajarle la vida
+     * @param pelea en la que estas involucrado
+     * @param atacable arma que estas utilizando
+     */
+    override fun disparaNpc(jugador: Jugador, pelea: Pelea, atacable: Atacable) {
+        GestionConsola.mostrarinfo("Lanza su ${TipoArma.CUCHILLO.desc} y te quita $danio puntos de vida ")
+        cantidadCuchillos--
+        jugador.recibirDaño(danio)
+
     }
 
     /**
@@ -33,7 +48,7 @@ class Cuchillo(var cantidadCuchillos:Int): Atacable {
         if (cantidadCuchillos >0)
             return true
         else {
-            println("No tienes suficientes cuchillos")
+            GestionConsola.mostrarinfo("No tienes suficientes cuchillos")
             return false
         }
     }
@@ -45,24 +60,24 @@ class Cuchillo(var cantidadCuchillos:Int): Atacable {
      */
     override fun recargar() {
         cantidadCuchillos = cuchillosRespuesto
-        println("Recargas tu ${TipoArma.CUCHILLO.desc} y ahora tienes $cantidadCuchillos Cuchillos más")
+        GestionConsola.mostrarinfo("Recargas tu ${TipoArma.CUCHILLO.desc} y ahora tienes $cantidadCuchillos Cuchillos más")
     }
 
     /**
      * Pegas navajazo a corta distancia que hace bastante daño, si no estas dentro del rango, fallas
-     *
+     *El npc recibe el daño
      */
-    override fun pegarMelee(pelea: Pelea, jugador: Jugador, npc:Enemigo){
+    override fun pegarMelee(pelea: Pelea, npc:Enemigo){
         if (pelea.distancia <=1){
-            println("Le pegas a melee al enemigo y le quitas 5 de vida")
-            jugador.vidas -= 5
-            jugador.info()
+            GestionConsola.mostrarinfo("Le pegas a melee al enemigo y le quitas 5 de vida")
+            npc.vidas -= 5
+            GestionConsola.mostrarinfo("${npc.info()}")
         }else{
-            println("No llegas y por tanto no haces daño")
+            GestionConsola.mostrarinfo("No llegas y por tanto no haces daño")
         }
     }
 
     override fun inspeccionar(){
-        println("Tienes un ${TipoArma.CUCHILLO.desc}, tus chuchillos actuales son $cantidadCuchillos y los de repuesto son $cuchillosRespuesto")
+        GestionConsola.mostrarinfo("Tienes un ${TipoArma.CUCHILLO.desc}, tus chuchillos actuales son $cantidadCuchillos y los de repuesto son $cuchillosRespuesto")
     }
 }

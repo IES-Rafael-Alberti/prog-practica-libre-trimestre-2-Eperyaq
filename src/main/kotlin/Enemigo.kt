@@ -43,4 +43,15 @@ class Enemigo(val nombre:String, val arma:Atacable, var vidas:Int) {
         vidas -= dañoRecibido
         println("La vida de $nombre es $vidas")
     }
+
+    fun desicionRandom(): Int{
+        val disparar = 1
+        val curaUrgente = 2
+
+        if (vidas <=2){
+            return curaUrgente
+        }else{
+            return disparar
+        }
+    }
 }

@@ -8,33 +8,27 @@ import kotlin.random.Random
 class Pelea(val jugador:Jugador, val npc: Enemigo) {
     var distancia = Random.nextInt(1, 10)
 
-    fun mostrarcositas(){
+    fun mostrarcositas(pelea:Pelea, atacable: Atacable){
         GestionConsola.funcionamientoJuego()
         GestionConsola.mostrarinfo("\n \n")// para darle espacio entre una pregunta y otra
         GestionConsola.funcionamientoArmas()
         clearConsole()
+        GestionConsola.historia1()
+        clearConsole()
+        GestionConsola.mostrarinfo("Te enfrentas contra ${npc.nombre}, la distancia actual es: $distancia metros")
+        GestionConsola.mostrarAtacarHuir(jugador,npc, pelea, atacable)
     }
 
     fun iniciarPelea(jugador: Jugador, npc:Enemigo, pelea: Pelea, atacable: Atacable) {
 
-        var dañoRecibido = jugador.arma.danio // siempre recibe daño aunque no ataquen
-
 
         GestionConsola.mostrarinfo("Que comience el duelo!")
-        GestionConsola.mostrarinfo("Te enfrentas contra ${npc.nombre}, la distancia actual es: $distancia metros")
-
-
 
         while (jugador.estavivo() && npc.estavivo()) {
-
+            //turno del Jugador
+            GestionConsola.mostrarinfo("${jugador.nombre} Tu arma es😈 ${jugador.arma.javaClass.simpleName}. Que quieres hacer?")
             GestionConsola.opcionesPelea(jugador, npc, atacable, pelea)
 
-
-            //turno del Jugador
-            GestionConsola.mostrarinfo("Tu arma es😈 ${jugador.arma.javaClass.simpleName}")
-            GestionConsola.mostrarinfo("${jugador.nombre} Que quieres hacer?")
-            GestionConsola.mostrarAtacarHuir(jugador,npc, pelea, atacable)
-            npc.recibirDaño(dañoRecibido)
             //comprueba si esta vivo el enemigo y si no es asi, muestra mensaje de que esta muerto
             if (!npc.estavivo()) {
                 GestionConsola.mostrarinfo("${npc.nombre} Ha muerto")
@@ -42,10 +36,8 @@ class Pelea(val jugador:Jugador, val npc: Enemigo) {
 
                 clearConsole()
                 //turno de la máquina
-                GestionConsola.mostrarinfo("Tu arma es😎 ${npc.arma.javaClass.simpleName}")
-                GestionConsola.mostrarinfo("${npc.nombre} Que quieres hacer?")
-                GestionConsola.mostrarAtacarHuir(jugador, npc, pelea, atacable)
-                jugador.recibirDaño(dañoRecibido)
+                GestionConsola.mostrarinfo("${npc.nombre} Tu arma es😎 ${npc.arma.javaClass.simpleName}. Que quieres hacer?")
+                GestionConsola.opcionesPeleaNpc(jugador, npc, atacable, pelea)
 
                 //comprueba si el jugador esta vivo, si no muestra un mensaje de muerte
                 if (!jugador.estavivo()) {

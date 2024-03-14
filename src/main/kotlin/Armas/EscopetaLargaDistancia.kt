@@ -17,15 +17,27 @@ class EscopetaLargaDistancia(var cantidadMunicion:Int, private val municionTope:
     /**
      * Disparas a tu contrincante y le bajas vida
      *
-     *@param jugador Jugador al que bajarle la vida
-     *
-     *@return Informacion acerca de los datos del [jugador]
+     *@param npc  al que bajarle la vida
+     *@param pelea en la que estas involucrado
+     *@param atacable arma que estas utilizando
      */
-    override fun disparar(jugador: Jugador,pelea: Pelea,atacable: Atacable):Int{
-
-        println("Disparas tu ${TipoArma.ESCOPETALARGADISTANCIA.desc} e inflinges $danio")
+    override fun disparaJugador(npc: Enemigo,pelea: Pelea,atacable: Atacable){
+        GestionConsola.mostrarinfo("Disparas tu ${TipoArma.ESCOPETALARGADISTANCIA.desc} e inflinges $danio")
         cantidadMunicion--
-        return danio
+        npc.recibirDaño(danio)
+    }
+
+    /**
+     * El NPC te dispara y te baja la vida
+     *
+     * @param jugador Jugador al que bajarle la vida
+     * @param pelea en la que estas involucrado
+     * @param atacable arma que estas utilizando
+     */
+    override fun disparaNpc(jugador: Jugador, pelea: Pelea, atacable: Atacable) {
+        GestionConsola.mostrarinfo("Dispara su ${TipoArma.ESCOPETALARGADISTANCIA.desc} y te quita $danio puntos de vida")
+        cantidadMunicion--
+        jugador.recibirDaño(danio)
     }
 
     /**
@@ -35,24 +47,24 @@ class EscopetaLargaDistancia(var cantidadMunicion:Int, private val municionTope:
      */
     override fun recargar() {
         cantidadMunicion = municionTope
-        println("Recargas tu ${TipoArma.ESCOPETALARGADISTANCIA.desc} con $municionTope balas")
+        GestionConsola.mostrarinfo("Recargas tu ${TipoArma.ESCOPETALARGADISTANCIA.desc} con $municionTope balas")
     }
 
     /**
      * Pegas un golpe a una distancia corta, si estas desde lejos no puedes pegar
-     *
+     *El npc recibe el daño
      */
-    override fun pegarMelee(pelea: Pelea, jugador: Jugador,npc: Enemigo){
+    override fun pegarMelee(pelea: Pelea, npc: Enemigo){
         if (pelea.distancia <=1){
-            println("Le pegas a melee al enemigo y le quitas 1 de vida")
-            jugador.vidas--
-            println(jugador.info())
+            GestionConsola.mostrarinfo("Le pegas a melee al enemigo y le quitas 1 de vida")
+            npc.vidas--
+            GestionConsola.mostrarinfo("${npc.info()}")
         }else{
-            println("No llegas y por tanto no haces daño")
+            GestionConsola.mostrarinfo("No llegas y por tanto no haces daño")
         }
     }
 
     override fun inspeccionar(){
-        println("Tu arma actual es una ${TipoArma.ESCOPETALARGADISTANCIA.desc}, actualmente tienes $cantidadMunicion")
+        GestionConsola.mostrarinfo("Tu arma actual es una ${TipoArma.ESCOPETALARGADISTANCIA.desc}, actualmente tienes $cantidadMunicion")
     }
 }

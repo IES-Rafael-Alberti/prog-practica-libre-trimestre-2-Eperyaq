@@ -9,7 +9,6 @@ import kotlin.random.Random
 class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
     private val vidaMaxima = 10
 
-    override fun seguir_camino() = println("Sigues tu camino...")
 
     /**
      * Insultas a tu contrincante y pasas de el pero...
@@ -17,13 +16,15 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
      * Nunca se le da la espalda a un enemigo
      */
     override fun insultar(){
-        println("$!#*€")
+        GestionConsola.mostrarinfo("$!#*€")
 
         val numerofijado = 2 //numero aleatorio, si sale el mismo en el random estas muerto
         val numerorandom = Random.nextInt(1,11)
         if (numerorandom == numerofijado){
             vidas-= 10
+            GestionConsola.mostrarinfo("Has muerto... nunca se le da la espalda a un enemigo", TextColors.red)
         }
+
     }
 
     /**
@@ -59,7 +60,6 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
 
     override fun huir(enemigo: Enemigo) {
         GestionConsola.mostrarinfo("Intentas huir...")
-        GestionConsola.dado()
 
         if (GestionConsola.dado()){ //si es true
             GestionConsola.mostrarinfo("Has tenido suerte y has logrado huir matando instantaneamente al enemigo",TextColors.green)
@@ -84,6 +84,6 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
      */
     fun recibirDaño(dañoRecibido:Int){
         vidas -= dañoRecibido
-        println("La vida de $nombre es $vidas")
+        GestionConsola.mostrarinfo("La vida de $nombre es $vidas")
     }
 }

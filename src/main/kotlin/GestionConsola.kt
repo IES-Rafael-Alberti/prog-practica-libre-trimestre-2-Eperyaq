@@ -34,15 +34,11 @@ object GestionConsola {
         var num = 0
 
         mostrarinfo("1.Pelear")
-        mostrarinfo("2.Lo insultas y pasas de el")
-        mostrarinfo("3.Mostrar informacion sobre tu equipo")
-
-        num = opciones(3)
+        mostrarinfo("Un verdadero hombre, cuando es faltado al respeto lo unico que quiere es SANGRE!", TextColors.red)
+        num = opciones(1)
 
         when (num) {
             1 -> pelea.iniciarPelea(jugador, npc, pelea, atacable)
-            2 -> jugador.insultar()
-            3 -> jugador.arma.inspeccionar()
         }
     }
 
@@ -54,18 +50,33 @@ object GestionConsola {
         mostrarinfo("5. Acercarte")
         mostrarinfo("6. Huir")
 
-        val opcion = opciones(5)
+        val opcion = opciones(6)
         when (opcion){
             1-> if (jugador.arma.comprobarMuncion()) {
-                    jugador.arma.disparar(jugador, pelea, atacable)
+                    jugador.arma.disparaJugador(npc, pelea, atacable)
                 }else{
                     opcionesPelea(jugador,npc,atacable,pelea)
                 }
-            2-> jugador.arma.pegarMelee(pelea,jugador, npc)
+            2-> jugador.arma.pegarMelee(pelea, npc)
             3-> jugador.curarse()
             4-> jugador.arma.recargar()
             5-> jugador.acortarDistancia(pelea)
             6-> jugador.huir(npc)
+        }
+    }
+
+    fun opcionesPeleaNpc( jugador: Jugador, npc: Enemigo, atacable: Atacable, pelea: Pelea ) {
+        mostrarinfo("1. Disparar")
+        mostrarinfo("2. Curarse")
+
+        val opcion = npc.desicionRandom()
+        when (opcion){
+            1-> if (npc.arma.comprobarMuncion()) {
+                npc.arma.disparaNpc(jugador, pelea, atacable)
+            }else{
+                opcionesPelea(jugador,npc,atacable,pelea)
+            }
+            2-> npc.curarse()
         }
     }
 
@@ -111,6 +122,7 @@ object GestionConsola {
         numjugador = opciones(5)
         var numerodado = Random.nextInt(1,6) //genera un numero aleatorio entre el 1 y el 5
 
+
         if (numjugador == numerodado){
             mostrarinfo("Has tenido suerte") //, Textcolor.color que quiera
             return true
@@ -155,22 +167,29 @@ object GestionConsola {
         terminal.println(color(mensaje)) // esta bien?
     }
 
-    fun parteprincipalprograma(jugador: Jugador,  npc: Enemigo, atacable: Atacable, pelea:Pelea){
 
-        mostrarAtacarHuir(jugador, npc, pelea, atacable)
-    }
 
-    fun historia1(){
-        val principal1 = mostrarinfo("Llegas a la ciudad de la que tanto se habla ya que se supone que en ella se encuentra el laboratorio del Doctor Heisenberg \n " +
-                "Te bajas de tu caballo porque observas lo que parece ser un hombre que lo acaban de echar de un bar... La habra liado ahi dentro\n" +
-                "Te observa, se percata de que lo estas viendo y te dice 'Que estás mirando tu Payaso'")
-        val principal2 = mostrarinfo("Llegas a la ciudad de la que tanto se habla ya que se supone que en ella se encuentra el laboratorio del Doctor Heisenberg \n" +
-                "Mientras te vas acercando a la ubicación un hombre te para y te pregunta donde vas \n" +
-                "Al decirle que vas al laboratorio del Doctor Heisenberg rapidamente el hombre saca el arma y te apunta con ella")
-        val principal3 = mostrarinfo("Llegas a la ciudad de la que tanto se habla ya que se supone que en ella se encuentra el laboratorio del Doctor Heisenberg \n" +
-                "Nada más entrar en la ciudad ves como un hombre empuja fuera de una casa a una mujer \n" +
-                "Te acercas a la mujer y esta entre sollozos te pide ayuda, te cuenta brevemente que el que la acaba de empujar es su marido el cual es un hombre agresivo y que esta harta \n" +
-                "Levantas la mirada, te bajas del caballo y llamas al hombre, a lo que este sin mediar palabra pega un tiro al cielo y te apunta con su arma")
-        //como puedo hacer para se escoja una random? he pensado en la lista e igual que pille uno random
+    fun historia1(): Unit {
+        val principal1 =
+                    "Llegas a la ciudad de la que tanto se habla ya que se supone que en ella se encuentra el laboratorio del Doctor Heisenberg \n" +
+                    "Te bajas de tu caballo porque observas lo que parece ser un hombre que lo acaban de echar de un bar... La habra liado ahi dentro\n" +
+                    "Te observa, se percata de que lo estas viendo y te dice 'Que estás mirando tu Payaso'"
+
+        val principal2 =
+                    "Llegas a la ciudad de la que tanto se habla ya que se supone que en ella se encuentra el laboratorio del Doctor Heisenberg \n" +
+                    "Mientras te vas acercando a la ubicación un hombre te para y te pregunta donde vas \n" +
+                    "Al decirle que vas al laboratorio del Doctor Heisenberg rapidamente el hombre saca el arma y te apunta con ella"
+
+        val principal3 =
+                    "Llegas a la ciudad de la que tanto se habla ya que se supone que en ella se encuentra el laboratorio del Doctor Heisenberg \n" +
+                    "Nada más entrar en la ciudad ves como un hombre empuja fuera de una casa a una mujer \n" +
+                    "Te acercas a la mujer y esta entre sollozos te pide ayuda, te cuenta brevemente que el que la acaba de empujar es su marido el cual es un hombre agresivo y que esta harta \n" +
+                    "Levantas la mirada, te bajas del caballo y llamas al hombre, a lo que este sin mediar palabra pega un tiro al cielo y te apunta con su arma"
+
+
+        val listahistorias = listOf(principal1, principal2, principal3) // crear una lista con todas las historias
+        val historiaEscogida = listahistorias.random() // escoge una historia Random
+        mostrarinfo(historiaEscogida)
+
     }
 }

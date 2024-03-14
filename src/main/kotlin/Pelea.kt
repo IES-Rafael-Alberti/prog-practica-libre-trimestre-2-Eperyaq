@@ -42,6 +42,7 @@ class Pelea(val jugador:Jugador, val npc: Enemigo) {
                 //comprueba si el jugador esta vivo, si no muestra un mensaje de muerte
                 if (!jugador.estavivo()) {
                     GestionConsola.mostrarinfo("${jugador.nombre} Ha muerto")
+                    GestionConsola.mostrarinfo("FIN DEL JUEGO", brightRed)
                 }else{
                     clearConsole()
                 }

@@ -1,5 +1,6 @@
 package org.practicatrim2
 import com.github.ajalt.mordant.rendering.TextColors
+import com.github.ajalt.mordant.rendering.TextStyles
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.Armas.Atacable
 import kotlin.random.Random
@@ -169,7 +170,7 @@ object GestionConsola {
 
 
 
-    fun historia1(): Unit {
+    fun historia1(){
         val principal1 =
                     "Llegas a la ciudad de la que tanto se habla ya que se supone que en ella se encuentra el laboratorio del Doctor Heisenberg \n" +
                     "Te bajas de tu caballo porque observas lo que parece ser un hombre que lo acaban de echar de un bar... La habra liado ahi dentro\n" +
@@ -191,5 +192,16 @@ object GestionConsola {
         val historiaEscogida = listahistorias.random() // escoge una historia Random
         mostrarinfo(historiaEscogida)
 
+    }
+
+    fun historia2(){
+        val medio1 = "Una vez pasado el ligero problema que acabas de tener, recuerdas que tu mision es llegar al laboratorio del Doctor Heisenberg porque tienes que recoger algo que este te tiene que entregar \n" +
+                     "Te encuentras a escasas calles del laboratorio, sientes como algo te susurra a la espalda, te giras, y no ves nada ni a nadie, te comienzas a poner nervioso \n" +
+                     "Serán los nervios, piensas, pero de repente escuchas de nuevo algo pero esta vez es a tu lado izquiero, sin dejar de mirar al frente ves como una silueta que está a tu lado, pero cuando miras ya no está \n" +
+                     "'Puedo verte, pero no mirarte' dices, a lo que esa cosa que esta a tu lado se rie y dice 'Los inutiles como tu no son capaces de verme.'"
+
+        val listahistorias1 = listOf(medio1) // crear una lista con todas las historias
+        val historiaEscogida = listahistorias1.random() // escoge una historia Random
+        mostrarinfo(historiaEscogida)
     }
 }

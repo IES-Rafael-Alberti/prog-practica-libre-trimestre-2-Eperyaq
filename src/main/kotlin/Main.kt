@@ -21,9 +21,10 @@ fun main() {
     val pelea = Pelea(personajePrincipal,listaEnemigos)
 
 
-    //GestionConsola.mostrarAtacarHuir(personajePrincipal, listaEnemigos, pelea, listaArmasDCS)
-    pelea.mostrarcositas(pelea,listaArmasDCS)
-    //pelea.iniciarPelea(personajePrincipal,listaEnemigos,pelea, listaArmasDCS)
+    //pelea.mostrarcositas(pelea,listaArmasDCS)
+
+
+
 
 
 }

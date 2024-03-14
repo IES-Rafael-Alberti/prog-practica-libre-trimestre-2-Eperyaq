@@ -17,6 +17,7 @@ class Pelea(val jugador:Jugador, val npc: Enemigo) {
         clearConsole()
         GestionConsola.mostrarinfo("Te enfrentas contra ${npc.nombre}, la distancia actual es: $distancia metros")
         GestionConsola.mostrarAtacarHuir(jugador,npc, pelea, atacable)
+        GestionConsola.preguntarSeguir(pelea, jugador, npc, atacable)
     }
 
     fun iniciarPelea(jugador: Jugador, npc:Enemigo, pelea: Pelea, atacable: Atacable) {

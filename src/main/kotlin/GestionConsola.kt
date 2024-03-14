@@ -200,8 +200,30 @@ object GestionConsola {
                      "Serán los nervios, piensas, pero de repente escuchas de nuevo algo pero esta vez es a tu lado izquiero, sin dejar de mirar al frente ves como una silueta que está a tu lado, pero cuando miras ya no está \n" +
                      "'Puedo verte, pero no mirarte' dices, a lo que esa cosa que esta a tu lado se rie y dice 'Los inutiles como tu no son capaces de verme.'"
 
-        val listahistorias1 = listOf(medio1) // crear una lista con todas las historias
+        val medio2 = "Una vez pasado el ligero problema que acabas de tener, recuerdas que tu mision es llegar al laboratorio del Doctor Heisenberg porque tienes que recoger algo que este te tiene que entregar \n" +
+                     "Después de la pelea te sientes algo sediento, por lo que te aproximas a un bar a echarte un buchito de whisky \n" +
+                     "Una vez dentro del bar, le pides al camarero uno de sus mejores whisky, te lo sirve y le pegas el primer buche, relajado suspiras y la persona sentada al lado tuya te dice \n" +
+                     "'Muy cansado despues de haber asesinado a ese hombre?' asientes con la cabeza, y se te pasa por la mente una pregunta ¿Como sabe este hombre a quien he matado si no recuerdo haberlo visto? \n" +
+                     "Cuando miras hacia el para comprobar si realmente no lo habias visto, este te dice 'Hijo De P*** Acabas de matar a mi Jodido hermano', miras hacia abajo y ves como te está apuntando con su arma"
+
+        val medio3 = "Una vez pasado el ligero problema que acabas de tener, recuerdas que tu mision es llegar al laboratorio del Doctor Heisenberg porque tienes que recoger algo que este te tiene que entregar \n" +
+                     "Montado en tu caballo, y como buen hombre del oeste que eres, vas con la viña de trigo en la boca. \n" +
+                    "A lo que un extraño que esta andando por ahi te mira y te dice '¿Tu quien te crees Clint Eastwood?' \n" +
+                    "Pasas de el y continuas tu camino.\n" +
+                    "El extraño no se tomó muy bien que pasaras de el y pego un tiro cerca de tu caballo lo que lo asusta y este encabrita y te tira. \n" +
+                    "Te levantas encabronado y ves que el otro te está apuntando con su arma preparado para dispararte"
+        val listahistorias1 = listOf(medio1, medio2, medio3) // crear una lista con todas las historias
         val historiaEscogida = listahistorias1.random() // escoge una historia Random
         mostrarinfo(historiaEscogida)
+    }
+
+    fun preguntarSeguir(pelea: Pelea, jugador: Jugador, npc: Enemigo, atacable: Atacable){
+        mostrarinfo("Quieres continuar la aventura? \n 1.Si \n 2.No")
+
+        val num = opciones(2)
+        when (num){
+            1-> pelea.iniciarPelea(jugador, npc, pelea, atacable ) // no va porque al entrar en el bucle de nuevo el npc esta muerto entonces no pasa
+            2 -> mostrarinfo("Fin del juego", TextColors.brightRed)
+        }
     }
 }

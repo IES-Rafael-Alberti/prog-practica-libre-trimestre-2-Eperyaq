@@ -49,11 +49,12 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
      * Te curas 1 de vida
      */
     override fun curarse() {
+        val numeroRandom = Random.nextInt(1,6)
         if (vidas == vidaMaxima){
             GestionConsola.mostrarinfo("No puedes curarte con la salud máxima")
         }else {
-            GestionConsola.mostrarinfo("Te curas 1 de vida")
-            vidas++
+            GestionConsola.mostrarinfo("Te curas $numeroRandom puntos de vida")
+            vidas += numeroRandom
             println(info())
         }
     }

@@ -12,19 +12,20 @@ class Enemigo(val nombre:String, val arma:Atacable, var vidas:Int) {
     /**
      * Informacion sobre tu personaje
      */
-    fun info() = println("A $nombre le quedan $vidas vidas.")
+    fun info() = GestionConsola.mostrarinfo("A $nombre le quedan $vidas vidas.")
 
 
     /**
      * Te curas 1 de vida
      */
     fun curarse() {
+        val numeroRandom = Random.nextInt(1,6)
         if (vidas == vidaMaxima){
-            println("No puedes curarte con la salud máxima")
+            GestionConsola.mostrarinfo("No puedes curarte con la salud máxima")
         }else {
-            println("Te curas 1 de vida")
-            vidas++
-            println(info())
+            GestionConsola.mostrarinfo("Se curas $numeroRandom de vida")
+            vidas+= numeroRandom
+            GestionConsola.mostrarinfo("${info()}")
         }
     }
 
@@ -41,7 +42,7 @@ class Enemigo(val nombre:String, val arma:Atacable, var vidas:Int) {
      */
     fun recibirDaño(dañoRecibido:Int){
         vidas -= dañoRecibido
-        println("La vida de $nombre es $vidas")
+        GestionConsola.mostrarinfo("La vida de $nombre es $vidas")
     }
 
     fun desicionRandom(): Int{

@@ -21,7 +21,7 @@ fun main() {
     val pelea = Pelea(personajePrincipal,listaEnemigos)
 
 
-    //pelea.mostrarcositas(pelea,listaArmasDCS)
+    pelea.mostrarcositas(pelea,listaArmasDCS)
 
 
 

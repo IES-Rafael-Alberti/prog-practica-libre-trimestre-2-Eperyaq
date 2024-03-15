@@ -33,7 +33,6 @@ interface Atacable {
          */
         fun inspeccionar()
 
-
         /**
          * Comprueba si tiene municion para hacer otras cosas
          */

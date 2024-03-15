@@ -25,7 +25,7 @@ class Cuchillo(var cantidadCuchillos:Int): Atacable {
     }
 
     /**
-     * El NPC te Lanza un cuchillo contra te baja la vida
+     * El NPC te Lanza un cuchillo que te baja la vida
      *
      * @param jugador Jugador al que bajarle la vida
      * @param pelea en la que estas involucrado

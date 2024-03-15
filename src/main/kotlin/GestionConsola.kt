@@ -362,6 +362,10 @@ object GestionConsola {
         mostrarinfo(historiaEscogida, TextColors.cyan)
 
     }
+
+    /**
+     * Fin de la historia
+     */
     private fun finHistoria(){
         mostrarinfo("\n Una vez derrotado el enemigo Diego Cano, sales del laboratorio del Doctor te montas en tu caballo y te vas, mientras montas a caballo del cansancio te caes al suelo y del golpe... \n" +
         "Te levantas agitado... Todo resulto ser una pesadilla...", TextColors.green)

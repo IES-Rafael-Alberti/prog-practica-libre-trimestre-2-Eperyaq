@@ -63,9 +63,4 @@ fun main() {
             GestionConsola.mostrarcositas3(personajePrincipal, bossFinal, pelea, listaArmasDCS)
         }
     }
-
-
-
-
-
 }

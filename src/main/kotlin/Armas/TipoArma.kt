@@ -7,5 +7,4 @@ enum class TipoArma(val desc: String) {
     ESCOPETALARGADISTANCIA("Escopeta de larga distancia"),
     PALOGOMAESPUMA("Palo de goma espuma")
     //Enum class con todos los tipos de armas
-
 }

@@ -66,7 +66,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 
 #### **Criterio global 1: Instancia objetos y hacer uso de ellos**
 - **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? Proporciona ejemplos específicos de tu código.
-*** 
+
 Para instanciar un objeto lo primero que he hecho ha sido crear una clase de la que poder instanciar, le he puesto sus parámetros al constructor primario y despues desde el Main he hecho una referencia a esa clase, pasandole todos los datos necesarios para que se instancie la clase
 
 Siendo esta la clase:
@@ -147,14 +147,14 @@ En mi código se usa en varias partes, por ejemplo en mi clase ***Escopeta*** De
 
     }
 ~~~
-
+***
 #### **Criterio global 3: Uso de entornos**
 - **(2.i)**: ¿Cómo utilizaste el IDE para el desarrollo de tu proyecto? Describe el proceso de creación, compilación, y prueba de tu programa.  
 1. Primero cree un nuevo proyecto escogiendo la opcion de hacerlo a traves del controlador de versiones
 2. Copie y pegue el enlace del repositorio de github classroom
-3. Una vez clonado el proyecto me hice un pequeño esquema y de ahi empecé a utilizar el IDE creando las clases, metodos etc
-4. He probado el codigo depurando y me gustaría implementarle una prueba unitaria con la libreria Junit.
-
+3. Una vez clonado el proyecto me hice un pequeño esquema y de ahi empecé a utilizar el IDE creando las clases, metodos etc.
+4. He probado el codigo depurando y he implementado dos pruebas unitarias con la libreria Junit.
+***
 #### **Criterio global 4: Definir clases y su contenido**
 - **(4.b, 4.c, 4.d, 4.g)**: Explica sobre un ejemplo de tu código, cómo definiste las clases en tu proyecto, es decir como identificaste las de propiedades, métodos y constructores y modificadores del control de acceso a métodos y propiedades, para representar al objeto del mundo real. ¿Cómo contribuyen estas clases a la solución del problema que tu aplicación aborda?
   
@@ -193,6 +193,7 @@ En cambio la cantidad de municion si la tenia que dejar 'abierta' para que méto
         }
     }
 ~~~
+***
 #### **Criterio global 5: Herencia y uso de clases abstractas e interfaces**
 - **(4.h, 4.j, 7.a, 7.b, 7.c)**: Describe sobre tu código cómo has implementado la herencia o utilizado interfaces en tu proyecto. ¿Por qué elegiste este enfoque y cómo beneficia a la estructura de tu aplicación? ¿De qué manera has utilizado los principios SOLID para mejorar el diseño de tu proyecto? ¿Mostrando tu código, contesta a qué principios has utilizado y qué beneficio has obtenido?
 ### Herencia / Interfaces:
@@ -240,22 +241,64 @@ Elegí usar una interfaz porque es una manera muy sencilla de crear una plantill
 ### Principios Solid:
 Para cumplir los Principios Solid he podido implementar el principio ***SRP (Single Responsability Principle)*** el cual se basa en comprobar que tus clases solo hagan una cosa, y en mi caso, en un principio mis armas disparaban, controlaban el daño, y hacían que el jugador enemigo recibiese el daño, pero al darme cuenta de que estaba incumpliendo ese principio SOLID decidí quitarle cosas a la clase y controlarlas desde otro lugar.   
 Ahora controlo el daño recibido desde otra clase y asi es más sencillo por si quiero cambiar algo de esta y no me influye en cambiar toda la clase del arma
-
-
+~~~
+ /**
+     * PRINCIPIO TREMENDAMENTE SOLIDO (lo quite de disparar)
+     * Comprueba si el arma tiene municion suficiente como para disparar
+     */
+    override fun comprobarMuncion():Boolean{
+        if (cantidadCuchillos >0)
+            return true
+        else {
+            GestionConsola.mostrarinfo("No tienes suficientes cuchillos")
+            return false
+        }
+    }
+~~~
+***
 #### **Criterio global 6: Diseño de jerarquía de clases**
 - **(7.d, 7.e, 7.f, 7.g)**: Presenta la jerarquía de clases que diseñaste. ¿Cómo probaste y depuraste esta jerarquía para asegurar su correcto funcionamiento? ¿Qué tipo de herencia has utilizado: Especificación, Especialización, Extensión, Construcción?
-  
+
+
+  ![Imagen Jerarquía](https://raw.githubusercontent.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-Eperyaq/master/src/main/kotlin/JerarquíaProg.png)  
+
 He usado un tipo de herencia en especializacion donde algunas clases son tipos especificos de la clase base.  
 A la hora de comprobar su correcto funcionamiento, a medida que iba haciendo el programa iba probando algunas funciones que pensaba que podrían dar problemas y si lo daban lo arreglaba
+***
 #### **Criterio global 7: Librerías de clases**
 - **(2.g, 4.k)**: Describe cualquier librería externa que hayas incorporado en tu proyecto. Explica cómo y por qué las elegiste, y cómo las incorporaste en tu proyecto. ¿Cómo extendió la funcionalidad de tu aplicación? Proporciona ejemplos específicos de su uso en tu proyecto.  
 
 Implementé la librería de ***Mordant*** la cual me ayuda a que la interfaz de mi proyecto sea más bonita y visual, ya que no es lo mismo ver todo en el color gris de la consola que verlo con colores que es más atractivo y menos aburrido a la vista.  
-Lo usé en casi todos de los String que tengo para que haga el juego más bonito.
-
+Lo usé en casi todos de los String que tengo para que haga el juego más bonito.  
+Lo implementé yendo a los ajustes del proyecto y en el apartado de librerias buscando "github.ajalt.mordant.jvm".
+***
 #### **Criterio global 8: Documentado**
-- **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. ¿Que herramientas has utilizado? ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?
+- **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. ¿Que herramientas has utilizado? ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?  
+  
+He comentado todo manualmente para asegurarme de que no hayan problemas con la documentación del juego, aseguro que mi documentación aporta valor, compresion y mantenimiento ya que explico explicitamente lo que hace cada método sin dar rodeos  
+Además de los Kdoc, he dejado algunos comentarios aclarativos dentro de algunas funciones para que sea más legible y entendible mi código.
+~~~
+/**
+     * Insultas a tu contrincante y pasas de el pero...
+     * Existe una posibilidad muy pequeña de que si te sale un numero random mueres..
+     * Nunca se le da la espalda a un enemigo
+     */
+    override fun insultar(){
+        GestionConsola.mostrarinfo("$!#*€")
 
+        val numerofijado = 2 //numero aleatorio, si sale el mismo en el random estas muerto
+        val numerorandom = Random.nextInt(1,11)
+        if (numerorandom == numerofijado){
+            vidas-= 10
+            GestionConsola.mostrarinfo("Has muerto... nunca se le da la espalda a un enemigo", TextColors.brightRed)
+        }
+    }
+~~~
+***
 #### **Criterio global 9: Genéricos**
-- **(6.f)**: Muestra ejemplos de tu código sobre cómo has implementado una clase con genéricos. ¿Qué beneficio has obtenido?
+- **(6.f)**: Muestra ejemplos de tu código sobre cómo has implementado una clase con genéricos. ¿Qué beneficio has obtenido?  
 
+No me ha dado tiempo a implementar lso genéricos pero tengo una ligera idea de como poder hacerlo    
+
+Idea: Implementar una pila de genéricos que te saque un arma aleatoria de tipo ***Atacable*** y un enemigo de tipo ***Enemigo***
+***

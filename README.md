@@ -70,17 +70,21 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 Para instanciar un objeto lo primero que he hecho ha sido crear una clase de la que poder instanciar, le he puesto sus parámetros al constructor primario y despues desde el Main he hecho una referencia a esa clase, pasandole todos los datos necesarios para que se instancie la clase
 
 Siendo esta la clase:
-~~~
+~~~ kotlin
 class Enemigo(val nombre:String, val arma:Atacable, var vidas:Int)
 ~~~
+[Enlace hacia el código](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-Eperyaq/blob/bee5c93648ce48115a0eac9cbf7ec14e4ba14022/src/main/kotlin/Enemigo.kt#L8) 
+
 Y esta la instancia: 
-~~~
+~~~ kotlin
 val npc3 = Enemigo("David El Mataescorias",listaArmasDCS,10)
 ~~~
+[Enlace hacia el codigo](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-Eperyaq/blob/bee5c93648ce48115a0eac9cbf7ec14e4ba14022/src/main/kotlin/Main.kt#L30)  
+
 Para pasarle los parámetros a los métodos he hecho algo parecido, simplemente le paso por el constructor lo que necesita y me aseguro de que la clase que contiene ese metodo tenga los valores necesarios para que funcione el método    
 
 En el caso de los métodos, Si necesito algo que tiene otra funcion u otro método, me aseguro de pasarle por parámetros todo lo que necesite, por ejemplo, aqui esta el método principal
-~~~
+~~~kotlin
  /**
      * Recibes el daño del ataque
      * @param [dañoRecibido], la vida que le baja al personaje
@@ -90,8 +94,10 @@ En el caso de los métodos, Si necesito algo que tiene otra funcion u otro méto
         GestionConsola.mostrarinfo("La vida de $nombre es $vidas")
     }
   ~~~
+[Enlace hacia el código](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-Eperyaq/blob/bee5c93648ce48115a0eac9cbf7ec14e4ba14022/src/main/kotlin/Enemigo.kt#L37-L45)  
+
 Y aquí tengo la funcion o clase de la que necesita coger los parámetros necesarios, De está cojo el daño para usarlo en el método de arriba
-~~~
+~~~ kotlin
 /**
      * Disparas a tu contrincante y le bajas vida
      *@param npc  al que bajarle la vida
@@ -104,23 +110,25 @@ Y aquí tengo la funcion o clase de la que necesita coger los parámetros necesa
         npc?.recibirDaño(danio)
     }
 ~~~
+[Enlace hacia el código](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-Eperyaq/blob/bee5c93648ce48115a0eac9cbf7ec14e4ba14022/src/main/kotlin/Armas/EscopetaLargaDistancia.kt#L17-L28)  
 
 ***
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?  
   
 He definido un método estático en la clase ***Pelea*** y lo he usado para que, cada vez que se llame a esta clase, el valor de mi método estático sea distinto ya que he implementado un random en este.
-~~~
+~~~ kotlin
 companion object {
         var distancia = Random.nextInt(1, 10)
     }
 ~~~
+[Enlace hacia el código](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-Eperyaq/blob/bee5c93648ce48115a0eac9cbf7ec14e4ba14022/src/main/kotlin/Pelea.kt#L9-L11)
 ***
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?
   
 En mi código se usa en varias partes, por ejemplo en mi clase ***Escopeta*** Dependiendo de la distancia que haya entre los jugadores esta hace más o menos daño
 
-~~~
+~~~ kotlin
 /**
      * Disparas a tu contrincante y le bajas vida
      *
@@ -147,6 +155,7 @@ En mi código se usa en varias partes, por ejemplo en mi clase ***Escopeta*** De
 
     }
 ~~~
+[Enlace hacia el código](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-Eperyaq/blob/bee5c93648ce48115a0eac9cbf7ec14e4ba14022/src/main/kotlin/Armas/Escopeta.kt#L17-L41)
 ***
 #### **Criterio global 3: Uso de entornos**
 - **(2.i)**: ¿Cómo utilizaste el IDE para el desarrollo de tu proyecto? Describe el proceso de creación, compilación, y prueba de tu programa.  
@@ -163,12 +172,15 @@ De ahi fue amoldando la idea, creando la clase de las armas, los parámetros nec
 
 Para identificarlo en mi caso fue facil porque, ¿Qué necesita un arma para disparar? Municion y realizar un daño después de haber disparado.  
 Para saber si algunas propiedades tenían que ser privadas o no solo necesitaba preguntarme algo ¿Alguna otra clase totalmente ajena de esta lo va a necesitar? Y en algunos casos si, para hacer comprobaciones  pero en muchos otros no, por eso hay algunos parámetros que los tengo privados
+~~~kotlin
+class Revolver(var cantidadMunicion:Int, private val municionTope: Int = 6): 
+   Atacable {
 ~~~
-class Revolver(var cantidadMunicion:Int, private val municionTope: Int = 6):
-~~~
+[Enlace al código](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-Eperyaq/blob/bee5c93648ce48115a0eac9cbf7ec14e4ba14022/src/main/kotlin/Armas/Revolver.kt#L8-L9)
+
 En este caso, para que querria cualquier otra clase saber cuanta municion me cabe como máximo en la clase revolver?   
 En cambio la cantidad de municion si la tenia que dejar 'abierta' para que métodos de otras clases pudieran acceder a ella para comprobar algo como por ejemplo en mi Object ***GestionConsola*** antes de disparar, compruebo si tengo balas y para eso necesito ver la cantidad de municion que tiene el arma en ese momento, y respondiendo de nuevo a la pregunta anterior, le tengo que pasar por parámetros el arma para poder acceder a esta y que asi este método pueda usarse de manera efectiva.
-~~~
+~~~kotlin
 /**
      * Opciones de la pelea del npc
      * @param jugador Jugador principal, lo necesitamos para las otras funciones de esta
@@ -193,13 +205,14 @@ En cambio la cantidad de municion si la tenia que dejar 'abierta' para que méto
         }
     }
 ~~~
+[Enlace hacia el código](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-Eperyaq/blob/bee5c93648ce48115a0eac9cbf7ec14e4ba14022/src/main/kotlin/GestionConsola.kt#L80-L102)
 ***
 #### **Criterio global 5: Herencia y uso de clases abstractas e interfaces**
 - **(4.h, 4.j, 7.a, 7.b, 7.c)**: Describe sobre tu código cómo has implementado la herencia o utilizado interfaces en tu proyecto. ¿Por qué elegiste este enfoque y cómo beneficia a la estructura de tu aplicación? ¿De qué manera has utilizado los principios SOLID para mejorar el diseño de tu proyecto? ¿Mostrando tu código, contesta a qué principios has utilizado y qué beneficio has obtenido?
 ### Herencia / Interfaces:
 El uso de los interfaces en mi proyecto ha sido para la facilidad que esta ofrece.  
 He creado un interfaz ***atacable*** que es como crear una plantilla para todas las armas y que todas las armas que hereden de esa interfaz van a tener minimo implementados un número de métodos mínimos que usaría un arma real
-~~~
+~~~kotlin
 interface Atacable {
 
         val danio:Int
@@ -236,17 +249,19 @@ interface Atacable {
 
 }
 ~~~
+[Enlace hacia el código](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-Eperyaq/blob/bee5c93648ce48115a0eac9cbf7ec14e4ba14022/src/main/kotlin/Armas/Atacable.kt#L1-L41)  
+
 Elegí usar una interfaz porque es una manera muy sencilla de crear una plantilla para un objeto real que use mínimo los métodos que yo implemente en el interfaz.
 
 ### Principios Solid:
 Para cumplir los Principios Solid he podido implementar el principio ***SRP (Single Responsability Principle)*** el cual se basa en comprobar que tus clases solo hagan una cosa, y en mi caso, en un principio mis armas disparaban, controlaban el daño, y hacían que el jugador enemigo recibiese el daño, pero al darme cuenta de que estaba incumpliendo ese principio SOLID decidí quitarle cosas a la clase y controlarlas desde otro lugar.   
 Ahora controlo el daño recibido desde otra clase y asi es más sencillo por si quiero cambiar algo de esta y no me influye en cambiar toda la clase del arma
-~~~
+~~~kotlin
  /**
      * PRINCIPIO TREMENDAMENTE SOLIDO (lo quite de disparar)
      * Comprueba si el arma tiene municion suficiente como para disparar
      */
-    override fun comprobarMuncion():Boolean{
+     fun comprobarMuncion():Boolean{
         if (cantidadCuchillos >0)
             return true
         else {
@@ -255,6 +270,8 @@ Ahora controlo el daño recibido desde otra clase y asi es más sencillo por si 
         }
     }
 ~~~
+[Enlace hacia el código](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-Eperyaq/blob/bee5c93648ce48115a0eac9cbf7ec14e4ba14022/src/main/kotlin/Armas/Atacable.kt#L1-L41)  
+
 ***
 #### **Criterio global 6: Diseño de jerarquía de clases**
 - **(7.d, 7.e, 7.f, 7.g)**: Presenta la jerarquía de clases que diseñaste. ¿Cómo probaste y depuraste esta jerarquía para asegurar su correcto funcionamiento? ¿Qué tipo de herencia has utilizado: Especificación, Especialización, Extensión, Construcción?
@@ -277,13 +294,13 @@ Lo implementé yendo a los ajustes del proyecto y en el apartado de librerias bu
   
 He comentado todo manualmente para asegurarme de que no hayan problemas con la documentación del juego, aseguro que mi documentación aporta valor, compresion y mantenimiento ya que explico explicitamente lo que hace cada método sin dar rodeos  
 Además de los Kdoc, he dejado algunos comentarios aclarativos dentro de algunas funciones para que sea más legible y entendible mi código.
-~~~
+~~~kotlin
 /**
      * Insultas a tu contrincante y pasas de el pero...
      * Existe una posibilidad muy pequeña de que si te sale un numero random mueres..
      * Nunca se le da la espalda a un enemigo
      */
-    override fun insultar(){
+     fun insultar(){
         GestionConsola.mostrarinfo("$!#*€")
 
         val numerofijado = 2 //numero aleatorio, si sale el mismo en el random estas muerto
@@ -294,6 +311,7 @@ Además de los Kdoc, he dejado algunos comentarios aclarativos dentro de algunas
         }
     }
 ~~~
+[Enlace al código](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-Eperyaq/blob/bee5c93648ce48115a0eac9cbf7ec14e4ba14022/src/main/kotlin/Jugador.kt#L18-L32)
 ***
 #### **Criterio global 9: Genéricos**
 - **(6.f)**: Muestra ejemplos de tu código sobre cómo has implementado una clase con genéricos. ¿Qué beneficio has obtenido?  

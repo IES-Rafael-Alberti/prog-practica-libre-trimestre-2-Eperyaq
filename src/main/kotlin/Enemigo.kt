@@ -10,21 +10,20 @@ class Enemigo(val nombre:String, val arma:Atacable, var vidas:Int) {
 
 
     /**
-     * Informacion sobre tu personaje
+     * Informacion sobre el personaje enemigo
      */
     fun info() = GestionConsola.mostrarinfo("A $nombre le quedan $vidas vidas.")
 
 
     /**
-     * Te curas 1 de vida
+     * se cura 1 de vida el npc
      */
     fun curarse() {
-        val numeroRandom = Random.nextInt(1,6)
         if (vidas == vidaMaxima){
             GestionConsola.mostrarinfo("No puedes curarte con la salud máxima")
         }else {
-            GestionConsola.mostrarinfo("Se curas $numeroRandom de vida")
-            vidas+= numeroRandom
+            GestionConsola.mostrarinfo("Se cura 1 de vida")
+            vidas++
             GestionConsola.mostrarinfo("${info()}")
         }
     }
@@ -45,14 +44,24 @@ class Enemigo(val nombre:String, val arma:Atacable, var vidas:Int) {
         GestionConsola.mostrarinfo("La vida de $nombre es $vidas")
     }
 
-    fun desicionRandom(): Int{
+    /**
+     * Dependiendo de la necesidad que tenga el enemigo usará una cosa u otra
+     * @param atacable el arma con el que va a atacar
+     * @return opcion elegida por el npc aunque realmente es random dependiendo de lo que necesite
+     */
+    fun desicionRandom(atacable: Atacable): Int{
         val disparar = 1
         val curaUrgente = 2
+        val recargar = 3
 
-        if (vidas <=2){
-            return curaUrgente
+        return if (vidas <=2){
+            curaUrgente
+        }else if (atacable.comprobarMuncion()) { //si tiene municion dispara, si no, recarga
+            disparar
         }else{
-            return disparar
+            recargar
         }
     }
+
+
 }

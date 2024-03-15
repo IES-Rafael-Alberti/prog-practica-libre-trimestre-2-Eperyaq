@@ -21,22 +21,22 @@ class Escopeta(var cantidadMunicion:Int, private val municionTope: Int = 2):
      * @param pelea en la que estas involucrado
      * @param atacable arma que estas utilizando
      */
-    override fun disparaJugador(npc: Enemigo,pelea: Pelea,atacable: Atacable){
+    override fun disparaJugador(npc: Enemigo?,pelea: Pelea,atacable: Atacable){
 
-        if (pelea.distancia < 6){ //segun lo cerca que estén la escopeta hará mas o menos daño
+        if (pelea.mostrarDistancia() < 6){ //segun lo cerca que estén la escopeta hará mas o menos daño
             this.danio = 3
-        }else if (pelea.distancia < 4){
+        }else if (pelea.mostrarDistancia() < 4){
             this.danio = 4
         }
-        else if (pelea.distancia <2){
+        else if (pelea.mostrarDistancia() <2){
             this.danio = 5
         }else{
             this.danio = 2
         }
 
-        GestionConsola.mostrarinfo("Disparas con tu ${TipoArma.ESCOPETA.desc} e inflinges $danio")
+        GestionConsola.mostrarinfo("Disparas con tu ${TipoArma.ESCOPETA.desc} e inflinges $danio de vida")
         cantidadMunicion--
-        npc.recibirDaño(danio)
+        npc?.recibirDaño(danio)
 
     }
 
@@ -67,17 +67,22 @@ class Escopeta(var cantidadMunicion:Int, private val municionTope: Int = 2):
     /**
      * Pegas un golpe a una distancia corta, si estas desde lejos no puedes pegar
      * El npc recibe el daño
+     * @param pelea Pelea en la que estas metido
+     * @param npc Npc que recibe el daño
      */
-    override fun pegarMelee(pelea: Pelea, npc:Enemigo){
-         if (pelea.distancia <=1){
+    override fun pegarMelee(pelea: Pelea, npc:Enemigo?){
+         if (pelea.mostrarDistancia() <=1){
             GestionConsola.mostrarinfo("Le pegas a melee al enemigo y le quitas 1 de vida")
-            npc.vidas--
-            GestionConsola.mostrarinfo("${npc.info()}")
+             npc?.vidas = npc?.vidas!! - 1
+            GestionConsola.mostrarinfo("${npc?.info()}")
         }else{
             GestionConsola.mostrarinfo("No llegas y por tanto no haces daño")
         }
     }
 
+    /**
+     * Inspeccionas el arma
+     */
     override fun inspeccionar(){
          GestionConsola.mostrarinfo("Tu arma actual es una ${TipoArma.ESCOPETA.desc} de doble barril, actualmente tienes $cantidadMunicion")
     }

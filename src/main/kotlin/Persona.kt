@@ -4,17 +4,24 @@ import org.practicatrim2.Armas.Atacable
 
 interface  Persona{
 
+     /**
+      * Insultas a tu enemigo
+      */
      fun insultar()
 
+     /**
+      * Muestra la informacion de tu personaje
+      */
      fun info()
 
-      fun acortarDistancia(pelea: Pelea)
-
+     /**
+      * Te curas
+      */
      fun curarse()
 
-     fun huir(enemigo: Enemigo)
-
-
-
+     /**
+      * Tratas de huir como un cobarde
+      */
+     fun huir(enemigo: Enemigo?)
 
 }

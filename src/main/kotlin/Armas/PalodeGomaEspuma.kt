@@ -5,12 +5,12 @@ import org.practicatrim2.GestionConsola
 import org.practicatrim2.Jugador
 import org.practicatrim2.Pelea
 
-class PalodeGomaEspuma():
-    Atacable {
+class PalodeGomaEspuma(): Atacable {
     override var danio = 1
 
     /**
      * Comprueba si el arma tiene municion suficiente como para disparar
+     * aunque en esta clase no vale para nada
      */
     override fun comprobarMuncion():Boolean{
         GestionConsola.mostrarinfo("Mmmm, que intentas comprobar?")
@@ -22,8 +22,9 @@ class PalodeGomaEspuma():
      *
      *@param jugador Jugador al que seguro que le haces gracia
      *@param pelea Pelea en la que participas
+     *@param atacable Arma que usas
      */
-    override fun disparaJugador(npc: Enemigo ,pelea: Pelea,atacable: Atacable){
+    override fun disparaJugador(npc: Enemigo? ,pelea: Pelea,atacable: Atacable){
         GestionConsola.mostrarinfo("Mmmm, que disparas? rayos laser?")
     }
 
@@ -50,15 +51,18 @@ class PalodeGomaEspuma():
      * @param pelea en la que estas metido
      * @param npc que recibe el ataque
      */
-    override fun pegarMelee(pelea: Pelea, npc: Enemigo){
-        if (pelea.distancia <=1){
+    override fun pegarMelee(pelea: Pelea, npc: Enemigo?){
+        if (pelea.mostrarDistancia() <=1){
             GestionConsola.mostrarinfo("Le pegas a melee al enemigo y le quitas 1 de vida")
-            npc.vidas -= 20
+            npc?.vidas = npc?.vidas!! - 20
         }else{
             GestionConsola.mostrarinfo("No llegas y por tanto no haces daño")
         }
     }
 
+    /**
+     * Inspeccionas tu arma
+     */
     override fun inspeccionar(){
         GestionConsola.mostrarinfo("Tu arma actual es un ${TipoArma.PALOGOMAESPUMA.desc}, y... no se que mas quieres saber la verdad")
     }

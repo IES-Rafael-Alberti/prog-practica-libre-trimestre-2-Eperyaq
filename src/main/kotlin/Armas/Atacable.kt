@@ -10,7 +10,7 @@ interface Atacable {
         /**
          * Disparas al npc  y le bajas vida RECIBE DAÑO EL NPC
          */
-        fun disparaJugador(npc: Enemigo, pelea: Pelea, atacable: Atacable)  // le paso la pelea para solo usarla en la escopeta, retorna un entero que es el daño que hace
+        fun disparaJugador(npc: Enemigo?, pelea: Pelea, atacable: Atacable)  // le paso la pelea para solo usarla en la escopeta, retorna un entero que es el daño que hace
 
 
         /**
@@ -26,7 +26,7 @@ interface Atacable {
         /**
          * Pegas con tu arma a melee
          */
-        fun pegarMelee(pelea: Pelea, npc:Enemigo)
+        fun pegarMelee(pelea: Pelea, npc:Enemigo?)
 
         /**
          * Informacion sobre el arma que tienes en el momento
@@ -34,6 +34,9 @@ interface Atacable {
         fun inspeccionar()
 
 
+        /**
+         * Comprueba si tiene municion para hacer otras cosas
+         */
         fun comprobarMuncion():Boolean
 
 }

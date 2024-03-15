@@ -7,8 +7,6 @@ import org.practicatrim2.Pelea
 
 class Cuchillo(var cantidadCuchillos:Int): Atacable {
     override val danio = 2
-
-
     companion object{
         private val cuchillosRespuesto: Int = 5 // la cantidad de cuchillos máxima que puede tener
     }
@@ -20,10 +18,10 @@ class Cuchillo(var cantidadCuchillos:Int): Atacable {
      * @param pelea en la que estas involucrado
      * @param atacable arma que estas utilizando
      */
-    override fun disparaJugador(npc: Enemigo, pelea: Pelea, atacable: Atacable) {
-        GestionConsola.mostrarinfo("Lanzas tu ${TipoArma.CUCHILLO.desc} e inflinges $danio")
+    override fun disparaJugador(npc: Enemigo?, pelea: Pelea, atacable: Atacable) {
+        GestionConsola.mostrarinfo("Lanzas tu ${TipoArma.CUCHILLO.desc} e inflinges $danio de vida")
         cantidadCuchillos--
-        npc.recibirDaño(danio)
+        npc?.recibirDaño(danio)
     }
 
     /**
@@ -41,7 +39,7 @@ class Cuchillo(var cantidadCuchillos:Int): Atacable {
     }
 
     /**
-     * PRINCIPIO TREMENDAMENTE SOLIDO
+     * PRINCIPIO TREMENDAMENTE SOLIDO (lo quite de disparar)
      * Comprueba si el arma tiene municion suficiente como para disparar
      */
     override fun comprobarMuncion():Boolean{
@@ -55,8 +53,6 @@ class Cuchillo(var cantidadCuchillos:Int): Atacable {
 
     /**
      * Recargas tus cuchillos
-     *
-     * @return String indicando cuantas cuchillos has recargado
      */
     override fun recargar() {
         cantidadCuchillos = cuchillosRespuesto
@@ -65,18 +61,23 @@ class Cuchillo(var cantidadCuchillos:Int): Atacable {
 
     /**
      * Pegas navajazo a corta distancia que hace bastante daño, si no estas dentro del rango, fallas
-     *El npc recibe el daño
+     * El npc recibe el daño
+     * @param pelea Pelea en la que estas metido
+     * @param npc Npc que recibe el daño
      */
-    override fun pegarMelee(pelea: Pelea, npc:Enemigo){
-        if (pelea.distancia <=1){
+    override fun pegarMelee(pelea: Pelea, npc:Enemigo?){
+        if (pelea.mostrarDistancia() <=1){
             GestionConsola.mostrarinfo("Le pegas a melee al enemigo y le quitas 5 de vida")
-            npc.vidas -= 5
+            npc?.vidas = npc?.vidas!! - 5
             GestionConsola.mostrarinfo("${npc.info()}")
         }else{
             GestionConsola.mostrarinfo("No llegas y por tanto no haces daño")
         }
     }
 
+    /**
+     * Inspeccionas el arma
+     */
     override fun inspeccionar(){
         GestionConsola.mostrarinfo("Tienes un ${TipoArma.CUCHILLO.desc}, tus chuchillos actuales son $cantidadCuchillos y los de repuesto son $cuchillosRespuesto")
     }

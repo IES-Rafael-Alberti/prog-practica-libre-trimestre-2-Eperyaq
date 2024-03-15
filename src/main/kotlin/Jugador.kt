@@ -2,13 +2,18 @@ package org.practicatrim2
 
 import com.github.ajalt.mordant.rendering.TextColors
 import org.practicatrim2.Armas.Atacable
-import org.practicatrim2.Armas.TipoArma
 import kotlin.random.Random
 
 
 class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
     private val vidaMaxima = 10
 
+    init {
+        if (vidas >16){
+            vidas = 5
+            GestionConsola.mostrarinfo("Por tramposo he ajustado tus vidas a 5, por querer liarlsela a mi codigo ;) \n")
+        }
+    }
 
     /**
      * Insultas a tu contrincante y pasas de el pero...
@@ -22,9 +27,8 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
         val numerorandom = Random.nextInt(1,11)
         if (numerorandom == numerofijado){
             vidas-= 10
-            GestionConsola.mostrarinfo("Has muerto... nunca se le da la espalda a un enemigo", TextColors.red)
+            GestionConsola.mostrarinfo("Has muerto... nunca se le da la espalda a un enemigo", TextColors.brightRed)
         }
-
     }
 
     /**
@@ -32,21 +36,9 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
      */
     override fun info() = GestionConsola.mostrarinfo("A $nombre le quedan $vidas vidas.")
 
-    /**
-     * Avanzas un metro para acercarte mas al rival
-     * @param [pelea], en la que estas metido
-     */
-    override fun acortarDistancia(pelea: Pelea){
-        if (pelea.distancia <= 1){
-            GestionConsola.mostrarinfo("No puedes acercarte más")
-        }else {
-            pelea.distancia -= 1
-            GestionConsola.mostrarinfo("Acortas un metro, la distancia actual es: ${pelea.distancia} metros", TextColors.green)
-        }
-    }
 
     /**
-     * Te curas 1 de vida
+     * Te curas un numero de vida random
      */
     override fun curarse() {
         val numeroRandom = Random.nextInt(1,6)
@@ -55,16 +47,19 @@ class Jugador(val nombre:String, val arma:Atacable, var vidas:Int):Persona {
         }else {
             GestionConsola.mostrarinfo("Te curas $numeroRandom puntos de vida")
             vidas += numeroRandom
-            println(info())
+            info()
         }
     }
 
-    override fun huir(enemigo: Enemigo) {
+    /**
+     * Tratas de huir tirando un dado, si tienes suerte, matas instantaneamente al enemigo, si no pasa el turno
+     */
+    override fun huir(enemigo: Enemigo?) {
         GestionConsola.mostrarinfo("Intentas huir...")
 
         if (GestionConsola.dado()){ //si es true
             GestionConsola.mostrarinfo("Has tenido suerte y has logrado huir matando instantaneamente al enemigo",TextColors.green)
-            enemigo.vidas-= 20 //lo siento pero es la unica manera que se me ocurre de cerrar el bucle sin un break
+            enemigo?.vidas = enemigo?.vidas!! - 20 //lo siento pero es la unica manera que se me ocurre de cerrar el bucle sin un break
         }else{
             GestionConsola.mostrarinfo("No pudiste huir...")
             //seguir con la pelea

@@ -61,6 +61,9 @@ fun main() {
 
         if (personajePrincipal.estavivo() && GestionConsola.preguntarSeguir()) { // lo mismo pregunta si quieres seguir jugando, si no quieres termina y si quieres te mete de nuevo a la pelea
             GestionConsola.mostrarcositas3(personajePrincipal, bossFinal, pelea, listaArmasDCS)
+            if (personajePrincipal.estavivo()){
+                GestionConsola.finHistoria()
+            }
         }
     }
 }

@@ -253,8 +253,6 @@ object GestionConsola {
 
         mostrarinfo("Te enfrentas contra ${npc3?.nombre}, la distancia actual es: ${pelea.mostrarDistancia()} metros")
         pelea.iniciarPelea3(jugador, npc3,pelea,atacable)
-
-        finHistoria()
     }
 
     /**
@@ -366,7 +364,7 @@ object GestionConsola {
     /**
      * Fin de la historia
      */
-    private fun finHistoria(){
+     fun finHistoria(){
         mostrarinfo("\n Una vez derrotado el enemigo Diego Cano, sales del laboratorio del Doctor te montas en tu caballo y te vas, mientras montas a caballo del cansancio te caes al suelo y del golpe... \n" +
         "Te levantas agitado... Todo resulto ser una pesadilla...", TextColors.green)
     }
